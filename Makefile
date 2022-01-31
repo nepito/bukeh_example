@@ -6,4 +6,4 @@ format:
 	black --line-length 100 myapp
 
 run:
-	bokeh serve --show myapp/main.py
+	bokeh serve --show --port=3535 myapp/main.py
