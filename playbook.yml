@@ -1,0 +1,16 @@
+- hosts: all
+  tasks:
+    - name: Actualiza paquetes del sistema operativo
+      apt:
+        upgrade: dist
+        update_cache: yes
+      become: yes
+      notify: Reinicia servidor
+    - name: Copia los archivos de código
+      copy:
+        src: myapp
+        dest: "{{ ansible_facts.user_dir }}"
+  handlers:
+    - name: Reinicia servidor
+      reboot:
+      become: yes
