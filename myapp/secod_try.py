@@ -4,22 +4,24 @@ from bokeh.embed import file_html, components
 from bokeh.io import save
 import numpy as np
 from jinja2 import Environment, FileSystemLoader
+import pandas as pd
 
-N = 4000
-x = np.random.random(size=N) * 100
-y = np.random.random(size=N) * 100
-radii = np.random.random(size=N) * 1.5
-colors = np.array([[r, g, 150] for r, g in zip(50 + 2 * x, 30 + 2 * y)], dtype="uint8")
+trimestre = pd.read_csv("trimestre_por_estudios.csv")
+x = trimestre["anios_esc"].values
+y = trimestre["ingreso"].values
+radii = trimestre["horas"].values
 
 TOOLS = "hover,crosshair,pan,wheel_zoom,box_zoom,reset,save,box_select,lasso_select"
+TOOLTIPS = [
+    ("Horas", "$radii"),
+    ("Ingreso","$ingreso")
+]
+p = figure(tools=TOOLS, tooltips=TOOLTIPS, title="Ingresos por años de estudio")
 
-p = figure(tools=TOOLS)
+p.scatter( x = x, y = y, radius=radii/40, fill_alpha=0.6, hover_color="red")
+p.xaxis.axis_label = 'Años de estudios'
+p.yaxis.axis_label = 'Ingresos'
 
-p.scatter(x, y, radius=radii, fill_color=colors, fill_alpha=0.6, line_color=None)
-
-
-html = file_html(p, CDN, "my_plot.html")
-save(p, "my_plot.html")
 script, div = components(p)
 fileLoader = FileSystemLoader("myapp")
 env = Environment(loader=fileLoader)
