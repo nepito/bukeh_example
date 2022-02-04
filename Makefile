@@ -1,4 +1,4 @@
-myapp/salidita.html:
+myapp/salidita.html: myapp/secod_try.py
 	python myapp/secod_try.py > myapp/salidita.html
 
 check:
