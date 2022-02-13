@@ -1,4 +1,5 @@
-from bokeh.plotting import figure
+from bokeh.models import Label, Title, NumeralTickFormatter
+from bokeh.plotting import ColumnDataSource, figure
 from bokeh.resources import CDN
 from bokeh.embed import file_html, components
 from bokeh.io import save
@@ -7,20 +8,17 @@ from jinja2 import Environment, FileSystemLoader
 import pandas as pd
 
 trimestre = pd.read_csv("trimestre_por_estudios.csv")
-x = trimestre["anios_esc"].values
-y = trimestre["ingreso"].values
-radii = trimestre["horas"].values
+source = ColumnDataSource(trimestre)
 
 TOOLS = "hover,crosshair,pan,wheel_zoom,box_zoom,reset,save,box_select,lasso_select"
-TOOLTIPS = [
-    ("Horas", "$radii"),
-    ("Ingreso","$ingreso")
-]
+
+TOOLTIPS = [("Horas semanales de trabajo", "@horas{0.}"), ("Ingreso", "@ingreso{($ 0,0)}")]
 p = figure(tools=TOOLS, tooltips=TOOLTIPS, title="Ingresos por años de estudio")
 
-p.scatter( x = x, y = y, radius=radii/40, fill_alpha=0.6, hover_color="red")
-p.xaxis.axis_label = 'Años de estudios'
-p.yaxis.axis_label = 'Ingresos'
+p.scatter(x='anios_esc', y='ingreso', fill_alpha=0.6, hover_color="red", source=source)
+p.xaxis.axis_label = "Años de estudios"
+p.yaxis.axis_label = "Ingresos"
+p.yaxis[0].formatter = NumeralTickFormatter(format="$0")
 
 script, div = components(p)
 fileLoader = FileSystemLoader("myapp")
