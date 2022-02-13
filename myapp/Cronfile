@@ -1,0 +1,4 @@
+HOME=/root
+SHELL=/bin/bash
+
+@reboot make bokeh

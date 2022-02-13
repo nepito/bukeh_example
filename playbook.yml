@@ -10,7 +10,11 @@
       copy:
         src: myapp
         dest: "{{ ansible_facts.user_dir }}"
+      notify: Configura crontab
   handlers:
+    - name: Configura crontab
+      shell: "crontab {{ ansible_facts.user_dir }}/myapp/Cronfile"
+      become: yes
     - name: Reinicia servidor
       reboot:
       become: yes
