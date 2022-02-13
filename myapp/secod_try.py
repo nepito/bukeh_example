@@ -15,7 +15,7 @@ TOOLS = "hover,crosshair,pan,wheel_zoom,box_zoom,reset,save,box_select,lasso_sel
 TOOLTIPS = [("Horas semanales de trabajo", "@horas{0.}"), ("Ingreso", "@ingreso{($ 0,0)}")]
 p = figure(tools=TOOLS, tooltips=TOOLTIPS, title="Ingresos por años de estudio")
 
-p.scatter(x='anios_esc', y='ingreso', fill_alpha=0.6, hover_color="red", source=source)
+p.scatter(x="anios_esc", y="ingreso", fill_alpha=0.6, hover_color="red", source=source)
 p.xaxis.axis_label = "Años de estudios"
 p.yaxis.axis_label = "Ingresos"
 p.yaxis[0].formatter = NumeralTickFormatter(format="$0")
