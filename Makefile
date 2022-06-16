@@ -23,5 +23,8 @@ run:
 up:
 	docker run --detach --publish=3535:3535 mamando make run
 	
-update_note:
-	docker run -v /home/nepo/Documents/repos/bukeh_example/myapp/:/myapp/myapp con-pandas make myapp/salidita.html
+update_note: trimestre_por_estudios.csv
+	docker run -v $PWD/myapp/:/myapp/myapp con-pandas make myapp/salidita.html
+
+trimestre_por_estudios.csv:
+	Rscript src/clean_data.R
