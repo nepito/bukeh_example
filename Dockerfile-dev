@@ -1,7 +1,4 @@
-FROM islasgeci/base:0.7.0
-RUN R -e "install.packages(c('covr', 'styler', 'testthat'), repos='http://cran.rstudio.com')"
-RUN R -e "remotes::install_github('astamm/nloptr')"
-RUN R -e "install.packages(c('car', 'emmeans', 'ggpubr', 'lme4', 'MuMIn', 'glue'), repos='http://cran.rstudio.com')"
+FROM islasgeci/base:latest
 RUN pip install \
     black \
     bokeh \
