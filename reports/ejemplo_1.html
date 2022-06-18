@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js"></script>
+	</head>
+	<body>
+	<canvas id="myChart" width="400" height="400"></canvas>	
+	<canvas id="myChart2" width="100" height="50"></canvas>	
+	<canvas id="myChart3" width="50" height="50"></canvas>	
+	</body>
+	<script>
+		var ctx = document.getElementById("myChart").getContext("2d")
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+  			data: {
+				labels: ["col_1", "col_2"],
+				datasets: [{
+					label: "Titulo",
+					data: [2, 5]
+				}]
+			}
+		})
+	</script>
+	<script>
+		var ctx = document.getElementById("myChart2").getContext("2d")
+const labels = ["ene", "feb", "mar", "abr", "may", "jun", "jul"];
+		const data_1 = {
+  labels: labels,
+  datasets: [{
+    label: 'My First Dataset',
+    data: [65, 59, 80, 81, 56, 55, 40],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)'
+    ],
+    borderWidth: 1
+  }]
+};
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: data_1,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+});
+
+	</script>
+	<script>
+		var ctx = document.getElementById("myChart3").getContext("2d")
+		const data = {
+  labels: [
+    'JJ',
+    'Minutos',
+    'Shots',
+    'Goles',
+    'Asistencias',
+    'Cycling',
+    'Running'
+  ],
+  datasets: [{
+    label: 'Nico Ibáñez',
+    data: [38, 30, 93, 17, 2, 55, 40],
+    fill: true,
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgb(255, 99, 132)',
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(255, 99, 132)'
+  }, {
+    label: 'Vinvent Janssen',
+    data: [26, 15, 61, 3, 1, 27, 100],
+    fill: true,
+    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    borderColor: 'rgb(54, 162, 235)',
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(54, 162, 235)'
+  }]
+};
+		var myChart = new Chart(ctx,
+		{
+  type: 'radar',
+  data: data,
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    }
+  },
+}
+		)
+		
+	</script>
+</html>
