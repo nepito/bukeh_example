@@ -29,9 +29,10 @@
     'Regates',
     'Intercepciones'
   ],
-  datasets: [{
-    label: 'Nico Ibáñez',
-    data: [38, 30, 93, 17, 2, 55, 40],
+  datasets: [
+    {
+    label: 'Rodrigo Aguirre',
+    data: [{{ player_1 }}],
     fill: true,
     backgroundColor: 'rgba(255, 99, 132, 0.2)',
     borderColor: 'rgb(255, 99, 132)',
@@ -39,16 +40,39 @@
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
     pointHoverBorderColor: 'rgb(255, 99, 132)'
-  }, {
-    label: 'Vinvent Janssen',
-    data: [26, 15, 61, 3, 1, 27, 100],
+  }, 
+    {
+    label: 'Germán Berterame',
+    data: [{{ player_2 }}],
     fill: true,
-    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-    borderColor: 'rgb(54, 162, 235)',
-    pointBackgroundColor: 'rgb(54, 162, 235)',
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgb(255, 99, 132)',
+    pointBackgroundColor: 'rgb(255, 99, 132)',
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(54, 162, 235)'
+    pointHoverBorderColor: 'rgb(255, 99, 132)'
+  }, 
+    {
+    label: 'Vinvent Janssen',
+    data: [{{ player_3 }}],
+    fill: true,
+    backgroundColor: 'rgba(102, 255, 102, 0.2)',
+    borderColor: 'rgb(102, 255, 102)',
+    pointBackgroundColor: 'rgb(102, 255, 102)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(102, 255, 102)'
+  }, 
+  {
+    label: 'Nico Ibáñez',
+    data: [{{ player_4 }}],
+    fill: true,
+    backgroundColor: 'rgba(255, 255, 0, 0.2)',
+    borderColor: 'rgb(255, 255, 0)',
+    pointBackgroundColor: 'rgb(255, 255, 0)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(255, 255, 0)'
   }]
 };
 		var myChart = new Chart(ctx,
