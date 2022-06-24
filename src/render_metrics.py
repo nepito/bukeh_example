@@ -3,13 +3,10 @@ from jinja2 import Environment, FileSystemLoader
 metrics = pd.read_csv("data/normalized_metrics.csv")
 
 def get_str_metrics(index):
-    mind_metrics = ["player_appearences", "goal_total", "goal_assists", "passes_key", "shots_on", "dribbles_success", "tackles_interceptions"]
+    mind_metrics = ["player_minutes", "goal_total", "goal_assists", "passes_key", "shots_on", "dribbles_success", "tackles_interceptions"]
     metrics_of_player_1 = list(metrics.loc[index][mind_metrics])
     str_player_1 = [str(metric) for metric in metrics_of_player_1]
     return str.join(', ', str_player_1)
-
-element_player_1 = get_str_metrics(1)
-to_render = {"str_player_1": element_player_1}
 
 fileLoader = FileSystemLoader("reports")
 env = Environment(loader=fileLoader)
