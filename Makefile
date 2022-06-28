@@ -16,6 +16,7 @@ deploy:
 
 format:
 	black --line-length 100 myapp
+	black --line-length 100 src
 
 run:
 	bokeh serve --show --port=3535 myapp/main.py
