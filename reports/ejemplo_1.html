@@ -22,13 +22,20 @@
 			Para eso debemos de definir cuáles son las características que queremos evaluar y cuál es su importancia.
 			</p>
 		</div>
+    <div>
+<figure class="figure">
 	<canvas id="myChart3" width="50" height="50"></canvas>	
+<figcaption class="figure-caption text-end"><strong>Figura 1.</strong> Métricas cuantitativas de los
+cuatro jugadores de interés. Las métricas están normalizadas a la métrica con valor mayor, es decir 
+el jugador con el mayor valor en un metrica tendrá 100 en esa métrica.</figcaption>
+</figure>
+		</div>
   
 <div class="container">
       <h3>Germán Berterame</h3>
 <figure class="figure">
 {{ script|safe }} {{ div|safe }}
-<figcaption class="figure-caption text-end"><strong>Figura 1.</strong> Goles anotados por Germán
+<figcaption class="figure-caption text-end"><strong>Figura 2.</strong> Goles anotados por Germán
 Berterame. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
 xG generado por el jugador.</figcaption>
 </figure>
@@ -38,7 +45,29 @@ xG generado por el jugador.</figcaption>
       <h3>Rodrigo Aguirre</h3>
 <figure class="figure">
 {{ script_ra|safe }} {{ div_ra|safe }}
-<figcaption class="figure-caption text-end"><strong>Figura 2.</strong> Ingreso mensual en México en función de los años de estudio.</figcaption>
+<figcaption class="figure-caption text-end"><strong>Figura 3.</strong> Goles anotados por Rodrigo
+  Aguirre. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
+  xG generado por el jugador.</figcaption>
+</figure>
+</div>
+
+<div class="container">
+      <h3>Vincent Janssen</h3>
+<figure class="figure">
+{{ script_vj|safe }} {{ div_vj|safe }}
+<figcaption class="figure-caption text-end"><strong>Figura 4.</strong> Goles anotados por Vinvent
+  Janssen. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
+  xG generado por el jugador.</figcaption>
+</figure>
+</div>
+
+<div class="container">
+      <h3>Nico Ibáñez</h3>
+<figure class="figure">
+{{ script_ni|safe }} {{ div_ni|safe }}
+<figcaption class="figure-caption text-end"><strong>Figura 5.</strong> Goles anotados por Nico
+  Ibáñez. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
+  xG generado por el jugador.</figcaption>
 </figure>
 </div>
 
@@ -105,7 +134,7 @@ xG generado por el jugador.</figcaption>
     pointHoverBorderColor: 'rgb(54, 162, 235)'
   }, 
     {
-    label: 'Vinvent Janssen',
+    label: 'Vincent Janssen',
     data: [{{ player_3 }}],
     fill: true,
     backgroundColor: 'rgba(102, 255, 102, 0.2)',
