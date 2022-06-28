@@ -3,6 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.2.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.2.min.js"></script>
 	</head>
 	<body>
 		<div>
@@ -19,6 +24,24 @@
 		</div>
 	<canvas id="myChart3" width="50" height="50"></canvas>	
   
+<div class="container">
+      <h3>Germán Berterame</h3>
+<figure class="figure">
+{{ script|safe }} {{ div|safe }}
+<figcaption class="figure-caption text-end"><strong>Figura 1.</strong> Goles anotados por Germán
+Berterame. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
+xG generado por el jugador.</figcaption>
+</figure>
+</div>
+
+<div class="container">
+      <h3>Rodrigo Aguirre</h3>
+<figure class="figure">
+{{ script_ra|safe }} {{ div_ra|safe }}
+<figcaption class="figure-caption text-end"><strong>Figura 2.</strong> Ingreso mensual en México en función de los años de estudio.</figcaption>
+</figure>
+</div>
+
   <div>
       <h2>Análisis jerárquico</h2>
     <p>
