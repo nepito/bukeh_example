@@ -3,14 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js"></script>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
         <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
         <script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.2.min.js"></script>
         <script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.2.min.js"></script>
 	</head>
 	<body>
-		<div>
+		<div class="container-md">
       <h1>¿Será debatible la superioridad de Berterame sobre Aguirre?</h1>
       <h2>Análisis exploratorio de datos de los jugadores</h2>
 			<p>
@@ -22,56 +24,80 @@
 			Para eso debemos de definir cuáles son las características que queremos evaluar y cuál es su importancia.
 			</p>
 		</div>
-    <div>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
 <figure class="figure">
 	<canvas id="myChart3" width="50" height="50"></canvas>	
 <figcaption class="figure-caption text-end"><strong>Figura 1.</strong> Métricas cuantitativas de los
 cuatro jugadores de interés. Las métricas están normalizadas a la métrica con valor mayor, es decir 
-el jugador con el mayor valor en un metrica tendrá 100 en esa métrica.</figcaption>
+el jugador con el mayor valor tendrá 100 en esa métrica.</figcaption>
 </figure>
+		</div>
 		</div>
   
 <div class="container">
       <h3>Germán Berterame</h3>
+
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
 <figure class="figure">
 {{ script|safe }} {{ div|safe }}
 <figcaption class="figure-caption text-end"><strong>Figura 2.</strong> Goles anotados por Germán
 Berterame. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
 xG generado por el jugador.</figcaption>
 </figure>
+		</div>
+		</div>
 </div>
 
 <div class="container">
       <h3>Rodrigo Aguirre</h3>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
 <figure class="figure">
 {{ script_ra|safe }} {{ div_ra|safe }}
 <figcaption class="figure-caption text-end"><strong>Figura 3.</strong> Goles anotados por Rodrigo
   Aguirre. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
   xG generado por el jugador.</figcaption>
 </figure>
+		</div>
+		</div>
 </div>
 
 <div class="container">
       <h3>Vincent Janssen</h3>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
 <figure class="figure">
 {{ script_vj|safe }} {{ div_vj|safe }}
 <figcaption class="figure-caption text-end"><strong>Figura 4.</strong> Goles anotados por Vinvent
   Janssen. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
   xG generado por el jugador.</figcaption>
 </figure>
+		</div>
+		</div>
 </div>
 
 <div class="container">
       <h3>Nico Ibáñez</h3>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
 <figure class="figure">
 {{ script_ni|safe }} {{ div_ni|safe }}
 <figcaption class="figure-caption text-end"><strong>Figura 5.</strong> Goles anotados por Nico
   Ibáñez. Al pasar el cursor sobre la gráfica podemos ver los minutos jugados en cada partido y el
   xG generado por el jugador.</figcaption>
 </figure>
+		</div>
+		</div>
 </div>
 
-  <div>
+  <div class="container">
       <h2>Análisis jerárquico</h2>
     <p>
       Hicimos un análisis jerárquico. Utilizamos dos tipos de métricas: deportiva y personal. La 
