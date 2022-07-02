@@ -10,6 +10,12 @@ buildConPandas:
 check:
 	black --check --line-length 100 myapp
 	flake8 --max-line-length 100 myapp
+	black --check --line-length 100 src
+	flake8 --max-line-length 100 src
+	black --check --line-length 100 tests
+	flake8 --max-line-length 100 tests
+	black --check --line-length 100 xg_plots
+	flake8 --max-line-length 100 xg_plots
 
 deploy:
 	ansible-playbook -u root -i 143.198.228.215, --private-key "~/.ssh/id_rsa" playbook.yml
