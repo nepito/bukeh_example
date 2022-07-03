@@ -1,6 +1,8 @@
 myapp/salidita.html: myapp/secod_try.py
 	python myapp/secod_try.py > myapp/salidita.html
 
+.PHONY: init install tests
+
 build:
 	docker build --tag=mamando .
 
@@ -26,6 +28,11 @@ format:
 	black --line-length 100 tests
 	black --line-length 100 xg_plots
 
+init: install tests
+
+install:
+	pip install --editable .
+
 run:
 	bokeh serve --show --port=3535 myapp/main.py
 
@@ -37,3 +44,6 @@ update_note: trimestre_por_estudios.csv
 
 trimestre_por_estudios.csv:
 	Rscript src/clean_data.R
+
+tests:
+	pytest --verbose
