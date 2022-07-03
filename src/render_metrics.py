@@ -1,6 +1,5 @@
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader
-from bokeh.io import show
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.embed import components
 from bokeh.colors import RGB

@@ -1,13 +1,7 @@
-from bokeh.models import Label, Title, NumeralTickFormatter
-from bokeh.plotting import ColumnDataSource, figure
-from bokeh.resources import CDN
-from bokeh.embed import file_html, components
-from bokeh.io import save
+from bokeh.embed import components
 import numpy as np
 from jinja2 import Environment, FileSystemLoader
-import pandas as pd
-import numpy as np
-from bokeh.plotting import figure, show, output_file
+from bokeh.plotting import figure, show
 from bokeh.models import ColumnDataSource, LabelSet
 
 num_vars = 9
