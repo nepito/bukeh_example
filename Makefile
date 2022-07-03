@@ -23,6 +23,8 @@ deploy:
 format:
 	black --line-length 100 myapp
 	black --line-length 100 src
+	black --line-length 100 tests
+	black --line-length 100 xg_plots
 
 run:
 	bokeh serve --show --port=3535 myapp/main.py
