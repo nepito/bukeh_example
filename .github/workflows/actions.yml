@@ -17,6 +17,6 @@ jobs:
     - name: Construye imagen
       run: docker build --tag nies .
     - name: Verifica el formato
-      run: docker run trs make check
+      run: docker run nies make check
     - name: Corre pruebas y evalua cobertura
-      run: docker run trs make tests
+      run: docker run nies make tests
