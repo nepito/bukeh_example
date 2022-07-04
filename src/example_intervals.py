@@ -4,25 +4,56 @@ from bokeh.embed import components
 from bokeh.models import ColumnDataSource
 from bokeh.sampledata.sprint import sprint
 from bokeh.colors import RGB
+import pandas as pd
 
 
+metrics = pd.read_csv("data/metrics_intervals.csv")
+metrics["max"] = metrics["values"]+0.1
 sprint.Year = sprint.Year.astype(str)
-group = sprint.groupby("Year")
+group = metrics.groupby("metrics")
 source = ColumnDataSource(group)
 
 p = figure(
     y_range=group,
-    x_range=(9.5, 12.7),
+    x_range=(-4, 4),
     width=400,
     height=550,
     toolbar_location=None,
     title="Time spreads for sprint medalists (by year)",
 )
-p.hbar(y="Year", left="Time_min", right="Time_max", height=0.4, source=source)
+p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
 p.patch(
-    [10.5, 10.5, 11.5, 11.5],
+    [-1, -1, 1, 1],
     [0, len(group), len(group), 0],
-    color=RGB(255, 99, 132, 0.2),
+    color=RGB(154,205,50, 0.2),
+    line_width=0,
+)
+
+p.patch(
+    [-2, -2, -1, -1],
+    [0, len(group), len(group), 0],
+    color=RGB(255,140,0, 0.2),
+    line_width=0,
+)
+
+p.patch(
+    [1, 1, 2, 2],
+    [0, len(group), len(group), 0],
+    color=RGB(255,140,0, 0.2),
+    line_width=0,
+)
+
+p.patch(
+    [-3, -3, -2, -2],
+    [0, len(group), len(group), 0],
+    color=RGB(255,69,0, 0.2),
+    line_width=0,
+)
+
+p.patch(
+    [2, 2, 3, 3],
+    [0, len(group), len(group), 0],
+    color=RGB(255,69,0, 0.2),
     line_width=0,
 )
 
