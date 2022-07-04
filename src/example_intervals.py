@@ -8,7 +8,7 @@ import pandas as pd
 
 
 metrics = pd.read_csv("data/metrics_intervals.csv")
-metrics["max"] = metrics["values"]+0.1
+metrics["max"] = metrics["values"] + 0.1
 sprint.Year = sprint.Year.astype(str)
 group = metrics.groupby("metrics")
 source = ColumnDataSource(group)
@@ -25,35 +25,35 @@ p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=sourc
 p.patch(
     [-1, -1, 1, 1],
     [0, len(group), len(group), 0],
-    color=RGB(154,205,50, 0.2),
+    color=RGB(154, 205, 50, 0.2),
     line_width=0,
 )
 
 p.patch(
     [-2, -2, -1, -1],
     [0, len(group), len(group), 0],
-    color=RGB(255,140,0, 0.2),
+    color=RGB(255, 140, 0, 0.2),
     line_width=0,
 )
 
 p.patch(
     [1, 1, 2, 2],
     [0, len(group), len(group), 0],
-    color=RGB(255,140,0, 0.2),
+    color=RGB(255, 140, 0, 0.2),
     line_width=0,
 )
 
 p.patch(
     [-3, -3, -2, -2],
     [0, len(group), len(group), 0],
-    color=RGB(255,69,0, 0.2),
+    color=RGB(255, 69, 0, 0.2),
     line_width=0,
 )
 
 p.patch(
     [2, 2, 3, 3],
     [0, len(group), len(group), 0],
-    color=RGB(255,69,0, 0.2),
+    color=RGB(255, 69, 0, 0.2),
     line_width=0,
 )
 
