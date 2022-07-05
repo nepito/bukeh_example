@@ -6,6 +6,9 @@ from bokeh.sampledata.sprint import sprint
 from bokeh.colors import RGB
 import pandas as pd
 
+TOOLTIPS = [
+    ("Valor", "@{values_mean}"),
+]
 
 metrics = pd.read_csv("data/metrics_intervals.csv")
 metrics["max"] = metrics["values"] + 0.1
@@ -19,6 +22,8 @@ p = figure(
     width=400,
     height=550,
     toolbar_location=None,
+    tools="hover",
+    tooltips=TOOLTIPS,
     title="Métricas de Cimarrones de Sonora \n Jornada 1: Tlaxcala",
 )
 p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
