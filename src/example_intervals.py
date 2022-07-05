@@ -1,7 +1,7 @@
 from jinja2 import Environment, FileSystemLoader
 from bokeh.plotting import figure
 from bokeh.embed import components
-from bokeh.models import ColumnDataSource
+from bokeh.models import ColumnDataSource, Span
 from bokeh.sampledata.sprint import sprint
 from bokeh.colors import RGB
 import pandas as pd
@@ -29,33 +29,29 @@ p.patch(
     line_width=0,
 )
 
-p.patch(
-    [-2, -2, -1, -1],
-    [0, len(group), len(group), 0],
-    color=RGB(255, 140, 0, 0.2),
-    line_width=0,
-)
+first_line = Span(
+    location=-2, dimension='height', line_color=RGB(255, 140, 0, 0.2),
+    line_dash='dashed', line_width=3)
 
-p.patch(
-    [1, 1, 2, 2],
-    [0, len(group), len(group), 0],
-    color=RGB(255, 140, 0, 0.2),
-    line_width=0,
-)
+p.add_layout(first_line)
 
-p.patch(
-    [-3, -3, -2, -2],
-    [0, len(group), len(group), 0],
-    color=RGB(255, 69, 0, 0.2),
-    line_width=0,
-)
+first_line = Span(
+    location=2, dimension='height', line_color=RGB(255, 140, 0, 0.2),
+    line_dash='dashed', line_width=3)
 
-p.patch(
-    [2, 2, 3, 3],
-    [0, len(group), len(group), 0],
-    color=RGB(255, 69, 0, 0.2),
-    line_width=0,
-)
+p.add_layout(first_line)
+
+second_line = Span(
+    location=-3, dimension='height', line_color=RGB(255, 69, 0),
+    line_dash='dashed', line_width=3)
+
+p.add_layout(second_line)
+
+second_line = Span(
+    location=3, dimension='height', line_color=RGB(255, 69, 0),
+    line_dash='dashed', line_width=3)
+
+p.add_layout(second_line)
 
 p.ygrid.grid_line_color = None
 p.xaxis.axis_label = "Time (seconds)"
