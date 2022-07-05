@@ -7,7 +7,8 @@ from bokeh.colors import RGB
 import pandas as pd
 
 TOOLTIPS = [
-    ("Valor", "@{values_mean}"),
+    ("Media anual", "@{mean_metrics_mean}"),
+    ("Partido actual", "@{this_match_mean}"),
 ]
 
 metrics = pd.read_csv("data/metrics_intervals.csv")
