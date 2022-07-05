@@ -19,7 +19,7 @@ p = figure(
     width=400,
     height=550,
     toolbar_location=None,
-    title="Time spreads for sprint medalists (by year)",
+    title="Métricas de Cimarrones de Sonora \n Jornada 1: Tlaxcala",
 )
 p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
 p.patch(
@@ -54,7 +54,6 @@ second_line = Span(
 p.add_layout(second_line)
 
 p.ygrid.grid_line_color = None
-p.xaxis.axis_label = "Time (seconds)"
 p.outline_line_color = None
 
 script, div = components(p)
