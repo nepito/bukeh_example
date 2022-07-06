@@ -35,29 +35,24 @@ p.patch(
     line_width=0,
 )
 
-first_line = Span(
-    location=-2, dimension='height', line_color=RGB(255, 140, 0, 0.2),
-    line_dash='dashed', line_width=3)
+def add_line_two_sd(p, location):
+    first_line = Span(
+        location=location, dimension='height', line_color=RGB(255, 140, 0, 0.2),
+        line_dash='dashed', line_width=3)
+    p.add_layout(first_line)
+    return p
 
-p.add_layout(first_line)
+def add_line_three_sd(p, location):
+    first_line = Span(
+        location=location, dimension='height', line_color=RGB(255, 69, 0),
+        line_dash='dashed', line_width=3)
+    p.add_layout(first_line)
+    return p
 
-first_line = Span(
-    location=2, dimension='height', line_color=RGB(255, 140, 0, 0.2),
-    line_dash='dashed', line_width=3)
-
-p.add_layout(first_line)
-
-second_line = Span(
-    location=-3, dimension='height', line_color=RGB(255, 69, 0),
-    line_dash='dashed', line_width=3)
-
-p.add_layout(second_line)
-
-second_line = Span(
-    location=3, dimension='height', line_color=RGB(255, 69, 0),
-    line_dash='dashed', line_width=3)
-
-p.add_layout(second_line)
+p = add_line_two_sd(p, -2)
+p = add_line_two_sd(p, 2)
+p = add_line_three_sd(p, -3)
+p = add_line_three_sd(p, 3)
 
 p.ygrid.grid_line_color = None
 p.outline_line_color = None
