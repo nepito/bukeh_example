@@ -1,10 +1,11 @@
 from jinja2 import Environment, FileSystemLoader
 from bokeh.plotting import figure
 from bokeh.embed import components
-from bokeh.models import ColumnDataSource, Span
+from bokeh.models import ColumnDataSource
 from bokeh.sampledata.sprint import sprint
 from bokeh.colors import RGB
 import pandas as pd
+from xg_plots import add_line_two_sd, add_line_three_sd
 
 TOOLTIPS = [
     ("Media anual", "@{mean_metrics_mean}"),
@@ -35,19 +36,6 @@ p.patch(
     line_width=0,
 )
 
-def add_line_two_sd(p, location):
-    first_line = Span(
-        location=location, dimension='height', line_color=RGB(255, 140, 0, 0.2),
-        line_dash='dashed', line_width=3)
-    p.add_layout(first_line)
-    return p
-
-def add_line_three_sd(p, location):
-    first_line = Span(
-        location=location, dimension='height', line_color=RGB(255, 69, 0),
-        line_dash='dashed', line_width=3)
-    p.add_layout(first_line)
-    return p
 
 p = add_line_two_sd(p, -2)
 p = add_line_two_sd(p, 2)
