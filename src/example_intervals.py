@@ -14,7 +14,6 @@ TOOLTIPS = [
 
 metrics = pd.read_csv("data/metrics_intervals.csv")
 metrics["max"] = metrics["values"] + 0.1
-sprint.Year = sprint.Year.astype(str)
 group = metrics.groupby("metrics")
 source = ColumnDataSource(group)
 
@@ -42,6 +41,7 @@ p = add_line_two_sd(p, 2)
 p = add_line_three_sd(p, -3)
 p = add_line_three_sd(p, 3)
 
+p.xaxis.minor_tick_line_color = None
 p.ygrid.grid_line_color = None
 p.outline_line_color = None
 
