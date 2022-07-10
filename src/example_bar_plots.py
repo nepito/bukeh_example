@@ -1,10 +1,12 @@
 from jinja2 import Environment, FileSystemLoader
 from bokeh.plotting import figure
 from bokeh.embed import components
+from bokeh.models import ColumnDataSource
+import pandas as pd
 
 
-equipos_rivales = ["Tapatio", "Tepatitlán", "Mineros", "Cancún", "Venados", "Pumas"]
-possession = ["possession_rival", "possession_team"]
+equipos_rivales = ["Tepatitlán", "Mineros", "Cancún", "Venados", "Tapatio", "Pumas"]
+possession = ["possession_team", "possession_rival"]
 colors = ["#718dbf", "#e84d60"]
 TOOLTIPS = [
     ("Juego", "@{match}"),
@@ -27,16 +29,17 @@ data = {
     "scheme_rival": ["3-4-3", "4-2-3-1", "4-1-4-1", "4-5-1", "4-2-3-1", "3-4-3"],
     "scheme_team": ["4-3-1-2", "4-3-1-2", "4-3-1-2", "4-3-1-2", "3-4-1-2", "3-4-3"],
 }
-
+df_possiession = pd.DataFrame(data)
+sorted_equipos_rivales = df_possiession.sort_values(by=['possession_team'])["rival_teams"]
 p = figure(
-    y_range=equipos_rivales,
+    y_range=sorted_equipos_rivales,
     height=250,
     title="Posesión en los partidos de los Cimarrones de Sonora",
     toolbar_location=None,
     tools="hover",
     tooltips=TOOLTIPS,
 )
-
+data = ColumnDataSource(df_possiession.sort_values(by=['possession_team']))
 p.hbar_stack(
     possession, y="rival_teams", height=0.9, color=colors, source=data, legend_label=possession
 )
