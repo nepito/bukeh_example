@@ -1,0 +1,153 @@
+from jinja2 import Environment, FileSystemLoader
+from bokeh.plotting import figure
+from bokeh.embed import components
+from bokeh.models import ColumnDataSource
+import pandas as pd
+
+
+equipos_rivales = ["Tepatitlán", "Mineros", "Cancún", "Venados", "Tapatio", "Pumas"]
+possession = ["possession_team", "possession_rival"]
+colors = ["#718dbf", "#e84d60"]
+TOOLTIPS = [
+    ("Juego", "@{match}"),
+    ("Sistema rival", "@{scheme_rival}"),
+    ("Sistema Cimarrones", "@{scheme_team}"),
+]
+match = [
+    "Cimarrones - Tapatío 2:1",
+    "Cimarrones - Tepatitlán 2:0",
+    "Mineros - Cimarrones 1:1",
+    "Cimarrones - Cancún 0:1",
+    "Cimarrones - Venados 1:1",
+    "Pumas - Cimarrones 2:2",
+]
+data = {
+    "rival_teams": equipos_rivales,
+    "match": match,
+    "possession_rival": [34, 61, 36, 31, 49, 59],
+    "possession_team": [66, 39, 64, 69, 51, 41],
+    "scheme_rival": ["3-4-3", "4-2-3-1", "4-1-4-1", "4-5-1", "4-2-3-1", "3-4-3"],
+    "scheme_team": ["4-3-1-2", "4-3-1-2", "4-3-1-2", "4-3-1-2", "3-4-1-2", "3-4-3"],
+}
+df_possiession = pd.DataFrame(data)
+sorted_equipos_rivales = df_possiession.sort_values(by=['possession_team'])["rival_teams"]
+p = figure(
+    y_range=sorted_equipos_rivales,
+    height=250,
+    title="Posesión en los partidos de los Cimarrones de Sonora",
+    toolbar_location=None,
+    tools="hover",
+    tooltips=TOOLTIPS,
+)
+data = ColumnDataSource(df_possiession.sort_values(by=['possession_team']))
+p.hbar_stack(
+    possession, y="rival_teams", height=0.9, color=colors, source=data, legend_label=possession
+)
+p.y_range.range_padding = 0.4
+p.ygrid.grid_line_color = None
+p.axis.minor_tick_line_color = None
+p.outline_line_color = None
+p.legend.location = "top_left"
+p.legend.orientation = "horizontal"
+p.xaxis.axis_label = "Posesión (%)"
+p.yaxis.axis_label = "Cimarrones vs"
+
+script, div = components(p)
+
+
+
+from bokeh.plotting import figure
+from bokeh.embed import components
+from bokeh.models import ColumnDataSource
+from bokeh.sampledata.sprint import sprint
+from bokeh.colors import RGB
+from bokeh.models import Panel, Tabs
+import pandas as pd
+from xg_plots import add_line_two_sd, add_line_three_sd
+
+TOOLTIPS = [
+    ("Media anual", "@{mean_metrics_mean}"),
+    ("Partido actual", "@{this_match_mean}"),
+]
+
+metrics = pd.read_csv("data/metrics_intervals_tlaxcala.csv")
+metrics["max"] = metrics["values"] + 0.1
+group = metrics.groupby("metrics")
+source = ColumnDataSource(group)
+
+p = figure(
+    y_range=group,
+    x_range=(-4, 4),
+    width=400,
+    height=550,
+    toolbar_location=None,
+    tools="hover",
+    tooltips=TOOLTIPS,
+    title="Métricas de Cimarrones de Sonora \n Jornada 1: Tlaxcala",
+)
+p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
+p.patch(
+    [-1, -1, 1, 1],
+    [0, len(group), len(group), 0],
+    color=RGB(154, 205, 50, 0.2),
+    line_width=0,
+)
+
+
+p = add_line_two_sd(p, -2)
+p = add_line_two_sd(p, 2)
+p = add_line_three_sd(p, -3)
+p = add_line_three_sd(p, 3)
+
+p.xaxis.minor_tick_line_color = None
+p.ygrid.grid_line_color = None
+p.outline_line_color = None
+tab_tlaxcala = Panel(child=p, title="tlaxcala")
+
+
+metrics = pd.read_csv("data/metrics_intervals_dorados.csv")
+metrics["max"] = metrics["values"] + 0.1
+group = metrics.groupby("metrics")
+source = ColumnDataSource(group)
+
+p_d = figure(
+    y_range=group,
+    x_range=(-4, 4),
+    width=400,
+    height=550,
+    toolbar_location=None,
+    tools="hover",
+    tooltips=TOOLTIPS,
+    title="Métricas de Cimarrones de Sonora \n Jornada 2: Dorados",
+)
+p_d.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
+p_d.patch(
+    [-1, -1, 1, 1],
+    [0, len(group), len(group), 0],
+    color=RGB(154, 205, 50, 0.2),
+    line_width=0,
+)
+
+
+p_d = add_line_two_sd(p_d, -2)
+p_d = add_line_two_sd(p_d, 2)
+p_d = add_line_three_sd(p_d, -3)
+p_d = add_line_three_sd(p_d, 3)
+
+p_d.xaxis.minor_tick_line_color = None
+p_d.ygrid.grid_line_color = None
+p_d.outline_line_color = None
+tab_dorados = Panel(child=p_d, title="dorados")
+
+p = Tabs(tabs=[tab_tlaxcala, tab_dorados])
+script_interval, div_interval = components(p)
+fileLoader = FileSystemLoader("reports")
+env = Environment(loader=fileLoader)
+
+rendered = env.get_template("metricas_anual_y_por_partido.html").render(
+    script=script,
+    div=div,
+    script_interval=script_interval,
+    div_interval=div_interval,
+)
+print(rendered)
