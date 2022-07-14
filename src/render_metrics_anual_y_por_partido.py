@@ -70,11 +70,14 @@ TOOLTIPS = [
     ("Partido actual", "@{this_match_mean}"),
 ]
 
-metrics = pd.read_csv("data/metrics_intervals_tlaxcala.csv")
-metrics["max"] = metrics["values"] + 0.1
-group = metrics.groupby("metrics")
-source = ColumnDataSource(group)
-
+def get_groups_and_source(path):
+    metrics = pd.read_csv(path)
+    metrics["max"] = metrics["values"] + 0.1
+    group = metrics.groupby("metrics")
+    source = ColumnDataSource(group)
+    return group, source
+path = "data/metrics_intervals_tlaxcala.csv"
+group, source = get_groups_and_source(path)
 def get_metrics_from_round_and_team(round, team, TOOLTIPS):
     p = figure(
         y_range=group,
@@ -113,16 +116,19 @@ def setup_axis_style(p, titulo):
 
 tab_tlaxcala = setup_axis_style(tlaxcala_p, "Tlaxcala")
 
-metrics = pd.read_csv("data/metrics_intervals_dorados.csv")
-metrics["max"] = metrics["values"] + 0.1
-group = metrics.groupby("metrics")
-source = ColumnDataSource(group)
-
+path = "data/metrics_intervals_dorados.csv"
+group, source = get_groups_and_source(path)
 dorados_p = get_metrics_from_round_and_team(2, "Dorados", TOOLTIPS)
 dorados_p = plot_annual_metrics(dorados_p, source)
 tab_dorados = setup_axis_style(dorados_p, "Dorados")
 
-p = Tabs(tabs=[tab_tlaxcala, tab_dorados])
+path = "data/metrics_intervals_mineros.csv"
+group, source = get_groups_and_source(path)
+dorados_p = get_metrics_from_round_and_team(3, "Mineros", TOOLTIPS)
+dorados_p = plot_annual_metrics(dorados_p, source)
+tab_mineros = setup_axis_style(dorados_p, "Mineros")
+
+p = Tabs(tabs=[tab_tlaxcala, tab_dorados, tab_mineros])
 script_interval, div_interval = components(p)
 fileLoader = FileSystemLoader("reports")
 env = Environment(loader=fileLoader)
