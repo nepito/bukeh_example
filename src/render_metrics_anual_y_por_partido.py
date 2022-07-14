@@ -75,69 +75,52 @@ metrics["max"] = metrics["values"] + 0.1
 group = metrics.groupby("metrics")
 source = ColumnDataSource(group)
 
-p = figure(
-    y_range=group,
-    x_range=(-4, 4),
-    width=400,
-    height=550,
-    toolbar_location=None,
-    tools="hover",
-    tooltips=TOOLTIPS,
-    title="Métricas de Cimarrones de Sonora \n Jornada 1: Tlaxcala",
-)
-p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
-p.patch(
-    [-1, -1, 1, 1],
-    [0, len(group), len(group), 0],
-    color=RGB(154, 205, 50, 0.2),
-    line_width=0,
-)
+def get_metrics_from_round_and_team(round, team, TOOLTIPS):
+    p = figure(
+        y_range=group,
+        x_range=(-4, 4),
+        width=400,
+        height=550,
+        toolbar_location=None,
+        tools="hover",
+        tooltips=TOOLTIPS,
+        title=f"Métricas de Cimarrones de Sonora \n Jornada {round}: {team}",
+    )
+    return p
+tlaxcala_p = get_metrics_from_round_and_team(1, "Tlaxcala", TOOLTIPS)
+def plot_annual_metrics(p, source):
+    p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
+    p.patch(
+        [-1, -1, 1, 1],
+        [0, len(group), len(group), 0],
+        color=RGB(154, 205, 50, 0.2),
+        line_width=0,
+    )
+    p = add_line_two_sd(p, -2)
+    p = add_line_two_sd(p, 2)
+    p = add_line_three_sd(p, -3)
+    p = add_line_three_sd(p, 3)
+    return p
 
+tlaxcala_p = plot_annual_metrics(tlaxcala_p, source)
 
-p = add_line_two_sd(p, -2)
-p = add_line_two_sd(p, 2)
-p = add_line_three_sd(p, -3)
-p = add_line_three_sd(p, 3)
+def setup_axis_style(p, titulo):
+    p.xaxis.minor_tick_line_color = None
+    p.ygrid.grid_line_color = None
+    p.outline_line_color = None
+    tab = Panel(child=p, title=titulo)
+    return tab
 
-p.xaxis.minor_tick_line_color = None
-p.ygrid.grid_line_color = None
-p.outline_line_color = None
-tab_tlaxcala = Panel(child=p, title="tlaxcala")
-
+tab_tlaxcala = setup_axis_style(tlaxcala_p, "Tlaxcala")
 
 metrics = pd.read_csv("data/metrics_intervals_dorados.csv")
 metrics["max"] = metrics["values"] + 0.1
 group = metrics.groupby("metrics")
 source = ColumnDataSource(group)
 
-p_d = figure(
-    y_range=group,
-    x_range=(-4, 4),
-    width=400,
-    height=550,
-    toolbar_location=None,
-    tools="hover",
-    tooltips=TOOLTIPS,
-    title="Métricas de Cimarrones de Sonora \n Jornada 2: Dorados",
-)
-p_d.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
-p_d.patch(
-    [-1, -1, 1, 1],
-    [0, len(group), len(group), 0],
-    color=RGB(154, 205, 50, 0.2),
-    line_width=0,
-)
-
-
-p_d = add_line_two_sd(p_d, -2)
-p_d = add_line_two_sd(p_d, 2)
-p_d = add_line_three_sd(p_d, -3)
-p_d = add_line_three_sd(p_d, 3)
-
-p_d.xaxis.minor_tick_line_color = None
-p_d.ygrid.grid_line_color = None
-p_d.outline_line_color = None
-tab_dorados = Panel(child=p_d, title="dorados")
+dorados_p = get_metrics_from_round_and_team(2, "Dorados", TOOLTIPS)
+dorados_p = plot_annual_metrics(dorados_p, source)
+tab_dorados = setup_axis_style(dorados_p, "Dorados")
 
 p = Tabs(tabs=[tab_tlaxcala, tab_dorados])
 script_interval, div_interval = components(p)
