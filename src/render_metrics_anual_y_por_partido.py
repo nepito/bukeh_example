@@ -30,7 +30,7 @@ data = {
     "scheme_team": ["4-3-1-2", "4-3-1-2", "4-3-1-2", "4-3-1-2", "3-4-1-2", "3-4-3"],
 }
 df_possiession = pd.DataFrame(data)
-sorted_equipos_rivales = df_possiession.sort_values(by=['possession_team'])["rival_teams"]
+sorted_equipos_rivales = df_possiession.sort_values(by=["possession_team"])["rival_teams"]
 p = figure(
     y_range=sorted_equipos_rivales,
     height=250,
@@ -39,7 +39,7 @@ p = figure(
     tools="hover",
     tooltips=TOOLTIPS,
 )
-data = ColumnDataSource(df_possiession.sort_values(by=['possession_team']))
+data = ColumnDataSource(df_possiession.sort_values(by=["possession_team"]))
 p.hbar_stack(
     possession, y="rival_teams", height=0.9, color=colors, source=data, legend_label=possession
 )
@@ -53,7 +53,6 @@ p.xaxis.axis_label = "Posesión (%)"
 p.yaxis.axis_label = "Cimarrones vs"
 
 script, div = components(p)
-
 
 
 from bokeh.plotting import figure
@@ -70,14 +69,19 @@ TOOLTIPS = [
     ("Partido actual", "@{this_match_mean}"),
 ]
 
+
 def get_groups_and_source(path):
     metrics = pd.read_csv(path)
     metrics["max"] = metrics["values"] + 0.1
     group = metrics.groupby("metrics")
     source = ColumnDataSource(group)
     return group, source
+
+
 path = "data/metrics_intervals_tlaxcala.csv"
 group, source = get_groups_and_source(path)
+
+
 def get_metrics_from_round_and_team(round, team, TOOLTIPS):
     p = figure(
         y_range=group,
@@ -90,7 +94,11 @@ def get_metrics_from_round_and_team(round, team, TOOLTIPS):
         title=f"Métricas de Cimarrones de Sonora \n Jornada {round}: {team}",
     )
     return p
+
+
 tlaxcala_p = get_metrics_from_round_and_team(1, "Tlaxcala", TOOLTIPS)
+
+
 def plot_annual_metrics(p, source):
     p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
     p.patch(
@@ -105,7 +113,9 @@ def plot_annual_metrics(p, source):
     p = add_line_three_sd(p, 3)
     return p
 
+
 tlaxcala_p = plot_annual_metrics(tlaxcala_p, source)
+
 
 def setup_axis_style(p, titulo):
     p.xaxis.minor_tick_line_color = None
@@ -113,6 +123,7 @@ def setup_axis_style(p, titulo):
     p.outline_line_color = None
     tab = Panel(child=p, title=titulo)
     return tab
+
 
 tab_tlaxcala = setup_axis_style(tlaxcala_p, "Tlaxcala")
 

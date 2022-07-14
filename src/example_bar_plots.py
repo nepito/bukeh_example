@@ -30,7 +30,7 @@ data = {
     "scheme_team": ["4-3-1-2", "4-3-1-2", "4-3-1-2", "4-3-1-2", "3-4-1-2", "3-4-3"],
 }
 df_possiession = pd.DataFrame(data)
-sorted_equipos_rivales = df_possiession.sort_values(by=['possession_team'])["rival_teams"]
+sorted_equipos_rivales = df_possiession.sort_values(by=["possession_team"])["rival_teams"]
 p = figure(
     y_range=sorted_equipos_rivales,
     height=250,
@@ -39,7 +39,7 @@ p = figure(
     tools="hover",
     tooltips=TOOLTIPS,
 )
-data = ColumnDataSource(df_possiession.sort_values(by=['possession_team']))
+data = ColumnDataSource(df_possiession.sort_values(by=["possession_team"]))
 p.hbar_stack(
     possession, y="rival_teams", height=0.9, color=colors, source=data, legend_label=possession
 )
