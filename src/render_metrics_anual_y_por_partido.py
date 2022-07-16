@@ -2,11 +2,15 @@ from jinja2 import Environment, FileSystemLoader
 from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource
+from bokeh.plotting import figure
+from bokeh.colors import RGB
+from bokeh.models import Panel, Tabs
 import pandas as pd
+from xg_plots import add_line_two_sd, add_line_three_sd
 
 
-equipos_rivales = ["Tepatitlán", "Mineros", "Cancún", "Venados", "Tapatio", "Pumas"]
-possession = ["possession_team", "possession_rival"]
+equipos_rivales = ["Tapatío", "Tepatitlán", "Mineros", "Cancún", "Venados", "Pumas"]
+possession = ["Cimarrones", "Rivales"]
 colors = ["#718dbf", "#e84d60"]
 TOOLTIPS = [
     ("Juego", "@{match}"),
@@ -24,13 +28,13 @@ match = [
 data = {
     "rival_teams": equipos_rivales,
     "match": match,
-    "possession_rival": [34, 61, 36, 31, 49, 59],
-    "possession_team": [66, 39, 64, 69, 51, 41],
+    "Rivales": [34, 61, 36, 31, 49, 59],
+    "Cimarrones": [66, 39, 64, 69, 51, 41],
     "scheme_rival": ["3-4-3", "4-2-3-1", "4-1-4-1", "4-5-1", "4-2-3-1", "3-4-3"],
     "scheme_team": ["4-3-1-2", "4-3-1-2", "4-3-1-2", "4-3-1-2", "3-4-1-2", "3-4-3"],
 }
-df_possiession = pd.DataFrame(data)
-sorted_equipos_rivales = df_possiession.sort_values(by=["possession_team"])["rival_teams"]
+df_possiession = pd.DataFrame(data).sort_values(by=["Cimarrones"])
+sorted_equipos_rivales = df_possiession["rival_teams"]
 p = figure(
     y_range=sorted_equipos_rivales,
     height=250,
@@ -39,7 +43,7 @@ p = figure(
     tools="hover",
     tooltips=TOOLTIPS,
 )
-data = ColumnDataSource(df_possiession.sort_values(by=["possession_team"]))
+data = ColumnDataSource(df_possiession)
 p.hbar_stack(
     possession, y="rival_teams", height=0.9, color=colors, source=data, legend_label=possession
 )
@@ -54,15 +58,6 @@ p.yaxis.axis_label = "Cimarrones vs"
 
 script, div = components(p)
 
-
-from bokeh.plotting import figure
-from bokeh.embed import components
-from bokeh.models import ColumnDataSource
-from bokeh.sampledata.sprint import sprint
-from bokeh.colors import RGB
-from bokeh.models import Panel, Tabs
-import pandas as pd
-from xg_plots import add_line_two_sd, add_line_three_sd
 
 TOOLTIPS = [
     ("Media anual", "@{mean_metrics_mean}"),
