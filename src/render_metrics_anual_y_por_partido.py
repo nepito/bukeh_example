@@ -70,6 +70,7 @@ def get_groups_and_source(path):
     metrics["max"] = metrics["values"] + 0.1
     group = metrics.groupby("metrics")
     source = ColumnDataSource(group)
+    group = metrics[::-1]["metrics"]
     return group, source
 
 
