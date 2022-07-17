@@ -1,0 +1,17 @@
+[build-system]
+requires = [
+    "flit_core >=2,<4",
+]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+author = "Nepo Rojas"
+author-email = "nepo.rojas@gmail.com"
+description-file = "README.md"
+home-page = "https://gitlab.com/nepito/bukeh_example"
+module = "xg_plots"
+requires = [
+    "pandas",
+    "typer",
+]
+requires-python=">=3"
