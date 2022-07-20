@@ -31,8 +31,7 @@ def add_line_three_sd(p, location):
     return p
 
 
-
-class Plotter_Step_Goals_and_xG():
+class Plotter_Step_Goals_and_xG:
     def __init__(self):
         self.cleaned_player = None
         self.name = None

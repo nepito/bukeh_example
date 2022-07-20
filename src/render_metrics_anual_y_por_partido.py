@@ -43,7 +43,7 @@ p = figure(
     tools="hover",
     tooltips=TOOLTIPS,
 )
-p.title.text_font_size='12pt'
+p.title.text_font_size = "12pt"
 data = ColumnDataSource(df_possiession)
 p.hbar_stack(
     possession, y="rival_teams", height=0.9, color=colors, source=data, legend_label=possession
@@ -90,7 +90,7 @@ def get_metrics_from_round_and_team(round, team, TOOLTIPS):
         tooltips=TOOLTIPS,
         title=f"Métricas de Cimarrones de Sonora \n Jornada {round}: {team}",
     )
-    p.title.text_font_size='12pt'
+    p.title.text_font_size = "12pt"
     return p
 
 
