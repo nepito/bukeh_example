@@ -3,6 +3,9 @@ myapp/salidita.html: myapp/secod_try.py
 
 .PHONY: init install tests
 
+metric_annual_and_by_matches.html: src/render_metrics_anual_y_por_partido.py
+	python src/render_metrics_anual_y_por_partido.py > metric_annual_and_by_matches.html
+
 build:
 	docker build --tag=mamando .
 
