@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.embed import components
 from bokeh.colors import RGB
+from xg_plots import Plotter_Step_Goals_and_xG
 
 metrics = pd.read_csv("data/normalized_metrics.csv")
 
@@ -17,7 +18,8 @@ def get_player(path, name):
     return cleaned_player
 
 
-berterame = get_player("data/berterame_wyscout.csv", "Germán Berterame")
+plotter = Plotter_Step_Goals_and_xG()
+plotter.set_player("data/berterame_wyscout.csv", "Germán Berterame")
 aguirre = get_player("data/aguirre_wyscout.csv", "Rodrigo Aguirre")
 janssen = get_player("data/janssen_wyscout.csv", "Vincent Janssen")
 ibanez = get_player("data/ibanez_wyscout.csv", "Nico Ibáñez")
@@ -26,20 +28,10 @@ TOOLTIPS = [
     ("Minutos Jugados", "@{Minutes played}"),
     ("xG", "@{xG}"),
 ]
-data = ColumnDataSource(berterame)
 data2 = ColumnDataSource(aguirre)
 data3 = ColumnDataSource(janssen)
 data4 = ColumnDataSource(ibanez)
-plot = figure(
-    x_axis_type="datetime",
-    title="Goles de Berterame en la Liga MX",
-    x_axis_label="Date",
-    y_axis_label="Goles",
-    tooltips=TOOLTIPS,
-)
-plot.step(x="Date", y="Goals", source=data, color="blue")
-plot.line(x="Date", y="Goals", source=data, color=RGB(54, 162, 235, 0.0))
-script, div = components(plot)
+script, div = plotter.plot_step_goals_and_xG(TOOLTIPS)
 
 plot_ra = figure(
     x_axis_type="datetime",
