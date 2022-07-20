@@ -1,6 +1,8 @@
 import pandas as pd
 from bokeh.colors import RGB
 from bokeh.models import Span
+from bokeh.plotting import figure, ColumnDataSource
+from bokeh.embed import components
 
 
 def return_one():
@@ -44,3 +46,16 @@ class Plotter_Step_Goals_and_xG:
         self.cleaned_player = player[just_mx][selected_columns]
         self.cleaned_player["player"] = name
         self.cleaned_player["Date"] = pd.to_datetime(self.cleaned_player["Date"])
+        self.__data = ColumnDataSource(self.cleaned_player)
+
+    def plot_step_goals_and_xG(self, TOOLTIPS, color="blue"):
+        p = figure(
+            x_axis_type="datetime",
+            title=f"Goles de {self.name} en la Liga MX",
+            x_axis_label="Fecha",
+            y_axis_label="Goles",
+            tooltips=TOOLTIPS,
+        )
+        p.step(x="Date", y="Goals", source=self.__data, color=color)
+        p.line(x="Date", y="Goals", source=self.__data, color=RGB(54, 162, 235, 0.0))
+        return components(p)
