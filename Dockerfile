@@ -1,5 +1,17 @@
-FROM python:3.8
-RUN pip install bokeh
-WORKDIR /myapp
+FROM islasgeci/base:latest
+RUN pip install \
+    black \
+    bokeh \
+    codecov \
+    fastapi \
+    flake8 \
+    mutmut \
+    pandas \
+    pylint \
+    pytest \
+    pytest-cov \
+    requests \
+    uvicorn
+WORKDIR /workdir
 COPY . .
 CMD ["make", "run"]

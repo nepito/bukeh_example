@@ -1,9 +1,6 @@
-from bokeh.models import Label, Title, NumeralTickFormatter
+from bokeh.models import NumeralTickFormatter
 from bokeh.plotting import ColumnDataSource, figure
-from bokeh.resources import CDN
-from bokeh.embed import file_html, components
-from bokeh.io import save
-import numpy as np
+from bokeh.embed import components
 from jinja2 import Environment, FileSystemLoader
 import pandas as pd
 
