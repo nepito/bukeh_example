@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.embed import components
 from bokeh.colors import RGB
+from xg_plots import Plotter_Step_Goals_and_xG
 
 metrics = pd.read_csv("data/normalized_metrics.csv")
 
@@ -17,62 +18,20 @@ def get_player(path, name):
     return cleaned_player
 
 
-berterame = get_player("data/berterame_wyscout.csv", "Germán Berterame")
-aguirre = get_player("data/aguirre_wyscout.csv", "Rodrigo Aguirre")
-janssen = get_player("data/janssen_wyscout.csv", "Vincent Janssen")
-ibanez = get_player("data/ibanez_wyscout.csv", "Nico Ibáñez")
 TOOLTIPS = [
     ("Partido", "@{Match}"),
     ("Minutos Jugados", "@{Minutes played}"),
     ("xG", "@{xG}"),
 ]
-data = ColumnDataSource(berterame)
-data2 = ColumnDataSource(aguirre)
-data3 = ColumnDataSource(janssen)
-data4 = ColumnDataSource(ibanez)
-plot = figure(
-    x_axis_type="datetime",
-    title="Goles de Berterame en la Liga MX",
-    x_axis_label="Date",
-    y_axis_label="Goles",
-    tooltips=TOOLTIPS,
-)
-plot.step(x="Date", y="Goals", source=data, color="blue")
-plot.line(x="Date", y="Goals", source=data, color=RGB(54, 162, 235, 0.0))
-script, div = components(plot)
-
-plot_ra = figure(
-    x_axis_type="datetime",
-    title="Goles de Aguirre en la Liga MX",
-    x_axis_label="Fecha",
-    y_axis_label="Goles",
-    tooltips=TOOLTIPS,
-)
-plot_ra.step(x="Date", y="Goals", source=data2, color="red")
-plot_ra.line(x="Date", y="Goals", source=data2, color=RGB(54, 162, 235, 0.0))
-script_ra, div_ra = components(plot_ra)
-
-plot_vj = figure(
-    x_axis_type="datetime",
-    title="Goles de Janssen en la Liga MX",
-    x_axis_label="Fecha",
-    y_axis_label="Goles",
-    tooltips=TOOLTIPS,
-)
-plot_vj.step(x="Date", y="Goals", source=data3, color="green")
-plot_vj.line(x="Date", y="Goals", source=data3, color=RGB(54, 162, 235, 0.0))
-script_vj, div_vj = components(plot_vj)
-
-plot_ni = figure(
-    x_axis_type="datetime",
-    title="Goles de Ibáñez en la Liga MX",
-    x_axis_label="Fecha",
-    y_axis_label="Goles",
-    tooltips=TOOLTIPS,
-)
-plot_ni.step(x="Date", y="Goals", source=data4, color="yellow")
-plot_ni.line(x="Date", y="Goals", source=data4, color=RGB(54, 162, 235, 0.0))
-script_ni, div_ni = components(plot_ni)
+plotter = Plotter_Step_Goals_and_xG()
+plotter.set_player("data/berterame_wyscout.csv", "Germán Berterame")
+script, div = plotter.plot_step_goals_and_xG(TOOLTIPS)
+plotter.set_player("data/aguirre_wyscout.csv", "Rodrigo Aguirre")
+script_ra, div_ra = plotter.plot_step_goals_and_xG(TOOLTIPS, color = "red")
+plotter.set_player("data/janssen_wyscout.csv", "Vincent Janssen")
+script_vj, div_vj = plotter.plot_step_goals_and_xG(TOOLTIPS, color = "green")
+plotter.set_player("data/ibanez_wyscout.csv", "Nico Ibáñez")
+script_ni, div_ni = plotter.plot_step_goals_and_xG(TOOLTIPS, color = "yellow")
 
 
 def get_str_metrics(index):
