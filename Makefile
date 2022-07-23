@@ -9,6 +9,9 @@ metric_annual_and_by_matches.html: src/render_metrics_anual_y_por_partido.py
 aguirre_berterame_ibanez_janssen.html: src/render_metrics.py
 	python src/render_metrics.py > aguirre_berterame_ibanez_janssen.html
 
+ten_expansion_players.html: reports/ten_players_wyscout_ahp.html src/render_ten_players_wyscout_ahp.py
+	python src/render_ten_players_wyscout_ahp.py > ten_expansion_players.html
+
 build:
 	docker build --tag=mamando .
 

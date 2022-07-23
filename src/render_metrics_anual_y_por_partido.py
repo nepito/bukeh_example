@@ -137,7 +137,13 @@ dorados_p = get_metrics_from_round_and_team(3, "Mineros", TOOLTIPS)
 dorados_p = plot_annual_metrics(dorados_p, source)
 tab_mineros = setup_axis_style(dorados_p, "Mineros")
 
-p = Tabs(tabs=[tab_tlaxcala, tab_dorados, tab_mineros])
+path = "data/metrics_intervals_alebrijes.csv"
+group, source = get_groups_and_source(path)
+dorados_p = get_metrics_from_round_and_team(4, "Alebrijes", TOOLTIPS)
+dorados_p = plot_annual_metrics(dorados_p, source)
+tab_alebrijes = setup_axis_style(dorados_p, "Alebrijes")
+
+p = Tabs(tabs=[tab_tlaxcala, tab_dorados, tab_mineros, tab_alebrijes])
 script_interval, div_interval = components(p)
 fileLoader = FileSystemLoader("reports")
 env = Environment(loader=fileLoader)
