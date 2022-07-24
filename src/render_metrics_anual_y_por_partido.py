@@ -7,7 +7,7 @@ from bokeh.plotting import figure
 from bokeh.colors import RGB
 from bokeh.models import Panel, Tabs
 import pandas as pd
-from xg_plots import add_line_two_sd, add_line_three_sd, add_horizontal_line
+from xg_plots import add_line_two_sd, add_line_three_sd, add_horizontal_line, add_patch_color
 
 
 equipos_rivales = ["Tapatío", "Tepatitlán", "Mineros", "Cancún", "Venados", "Pumas"]
@@ -96,16 +96,6 @@ def get_metrics_from_round_and_team(round, team, TOOLTIPS):
 
 
 tlaxcala_p = get_metrics_from_round_and_team(1, "Tlaxcala", TOOLTIPS)
-
-
-def add_patch_color(p, x, y, color):
-    p.patch(
-        x,
-        y,
-        color=RGB(*color),
-        line_width=0,
-    )
-    return p
 
 
 def plot_annual_metrics(p, source):

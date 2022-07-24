@@ -69,3 +69,13 @@ class Plotter_Step_Goals_and_xG:
         p.step(x="Date", y="Goals", source=self.__data, color=color)
         p.line(x="Date", y="Goals", source=self.__data, color=RGB(54, 162, 235, 0.0))
         return components(p)
+
+
+def add_patch_color(p, x, y, color):
+    p.patch(
+        x,
+        y,
+        color=RGB(*color),
+        line_width=0,
+    )
+    return p
