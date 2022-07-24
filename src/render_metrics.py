@@ -27,11 +27,11 @@ plotter = Plotter_Step_Goals_and_xG()
 plotter.set_player("data/berterame_wyscout.csv", "Germán Berterame")
 script, div = plotter.plot_step_goals_and_xG(TOOLTIPS)
 plotter.set_player("data/aguirre_wyscout.csv", "Rodrigo Aguirre")
-script_ra, div_ra = plotter.plot_step_goals_and_xG(TOOLTIPS, color = "red")
+script_ra, div_ra = plotter.plot_step_goals_and_xG(TOOLTIPS, color="red")
 plotter.set_player("data/janssen_wyscout.csv", "Vincent Janssen")
-script_vj, div_vj = plotter.plot_step_goals_and_xG(TOOLTIPS, color = "green")
+script_vj, div_vj = plotter.plot_step_goals_and_xG(TOOLTIPS, color="green")
 plotter.set_player("data/ibanez_wyscout.csv", "Nico Ibáñez")
-script_ni, div_ni = plotter.plot_step_goals_and_xG(TOOLTIPS, color = "yellow")
+script_ni, div_ni = plotter.plot_step_goals_and_xG(TOOLTIPS, color="yellow")
 
 
 def get_str_metrics(index):
