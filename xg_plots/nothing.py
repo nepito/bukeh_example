@@ -21,6 +21,16 @@ def add_line_two_sd(p, location):
     return p
 
 
+def add_horizontal_line(p, location):
+    first_line = Span(
+        location=location,
+        dimension="width",
+        line_width=1,
+    )
+    p.add_layout(first_line)
+    return p
+
+
 def add_line_three_sd(p, location):
     first_line = Span(
         location=location,
