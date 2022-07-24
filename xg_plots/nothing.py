@@ -79,3 +79,44 @@ def add_patch_color(p, x, y, color):
         line_width=0,
     )
     return p
+
+
+def direct_metrics(p, x, color):
+    y = [9, 13, 13, 9]
+    return add_patch_color(p, x, y, color)
+
+
+def indirect_metrics(p, x, color):
+    y = [0, 6, 6, 0]
+    return add_patch_color(p, x, y, color)
+
+
+def good_direct_metrics(p):
+    x = [1, 1, 2, 2]
+    color = [154, 205, 50, 0.1]
+    return direct_metrics(p, x, color)
+
+
+def better_direct_metrics(p):
+    x = [2, 2, 3, 3]
+    color = [154, 205, 50, 0.3]
+    return direct_metrics(p, x, color)
+
+
+def bad_direct_metrics(p):
+    x = [-2, -2, -1, -1]
+    color = [255, 140, 0, 0.1]
+    return direct_metrics(p, x, color)
+
+
+def worst_direct_metrics(p):
+    x = [-3, -3, -2, -2]
+    color = [255, 140, 0, 0.3]
+    return direct_metrics(p, x, color)
+
+def add_patch_to_direct_metrics(p):
+    p = bad_direct_metrics(p)
+    p = worst_direct_metrics(p)
+    p = good_direct_metrics(p)
+    p = better_direct_metrics(p)
+    return p

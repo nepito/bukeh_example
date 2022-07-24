@@ -7,7 +7,14 @@ from bokeh.plotting import figure
 from bokeh.colors import RGB
 from bokeh.models import Panel, Tabs
 import pandas as pd
-from xg_plots import add_line_two_sd, add_line_three_sd, add_horizontal_line, add_patch_color
+from xg_plots import (
+    add_line_two_sd,
+    add_line_three_sd,
+    add_horizontal_line,
+    add_patch_color,
+    indirect_metrics,
+    add_patch_to_direct_metrics,
+)
 
 
 equipos_rivales = ["Tapatío", "Tepatitlán", "Mineros", "Cancún", "Venados", "Pumas"]
@@ -104,10 +111,7 @@ def plot_annual_metrics(p, source):
     p = add_patch_color(p, [2, 2, 3, 3], [0, 6, 6, 0], [255, 140, 0, 0.3])
     p = add_patch_color(p, [-2, -2, -1, -1], [0, 6, 6, 0], [154, 205, 50, 0.1])
     p = add_patch_color(p, [-3, -3, -2, -2], [0, 6, 6, 0], [154, 205, 50, 0.3])
-    p = add_patch_color(p, [-2, -2, -1, -1], [9, len(group), len(group), 9], [255, 140, 0, 0.1])
-    p = add_patch_color(p, [-3, -3, -2, -2], [9, len(group), len(group), 9], [255, 140, 0, 0.3])
-    p = add_patch_color(p, [1, 1, 2, 2], [9, len(group), len(group), 9], [154, 205, 50, 0.1])
-    p = add_patch_color(p, [2, 2, 3, 3], [9, len(group), len(group), 9], [154, 205, 50, 0.3])
+    p = add_patch_to_direct_metrics(p)
     p = add_line_two_sd(p, -2)
     p = add_line_two_sd(p, 2)
     p = add_line_three_sd(p, -3)
