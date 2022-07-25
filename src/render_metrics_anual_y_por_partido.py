@@ -1,3 +1,4 @@
+import re
 from jinja2 import Environment, FileSystemLoader
 from bokeh.plotting import figure
 from bokeh.embed import components
@@ -6,7 +7,14 @@ from bokeh.plotting import figure
 from bokeh.colors import RGB
 from bokeh.models import Panel, Tabs
 import pandas as pd
-from xg_plots import add_line_two_sd, add_line_three_sd
+from xg_plots import (
+    add_line_two_sd,
+    add_line_three_sd,
+    add_horizontal_line,
+    add_patch_color,
+    indirect_metrics,
+    add_patch_to_direct_metrics,
+)
 
 
 equipos_rivales = ["Tapatío", "Tepatitlán", "Mineros", "Cancún", "Venados", "Pumas"]
@@ -99,16 +107,17 @@ tlaxcala_p = get_metrics_from_round_and_team(1, "Tlaxcala", TOOLTIPS)
 
 def plot_annual_metrics(p, source):
     p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
-    p.patch(
-        [-1, -1, 1, 1],
-        [0, len(group), len(group), 0],
-        color=RGB(154, 205, 50, 0.2),
-        line_width=0,
-    )
+    p = add_patch_color(p, [1, 1, 2, 2], [0, 6, 6, 0], [255, 140, 0, 0.1])
+    p = add_patch_color(p, [2, 2, 3, 3], [0, 6, 6, 0], [255, 140, 0, 0.3])
+    p = add_patch_color(p, [-2, -2, -1, -1], [0, 6, 6, 0], [154, 205, 50, 0.1])
+    p = add_patch_color(p, [-3, -3, -2, -2], [0, 6, 6, 0], [154, 205, 50, 0.3])
+    p = add_patch_to_direct_metrics(p)
     p = add_line_two_sd(p, -2)
     p = add_line_two_sd(p, 2)
     p = add_line_three_sd(p, -3)
     p = add_line_three_sd(p, 3)
+    p = add_horizontal_line(p, 6)
+    p = add_horizontal_line(p, 9)
     return p
 
 
@@ -137,7 +146,13 @@ dorados_p = get_metrics_from_round_and_team(3, "Mineros", TOOLTIPS)
 dorados_p = plot_annual_metrics(dorados_p, source)
 tab_mineros = setup_axis_style(dorados_p, "Mineros")
 
-p = Tabs(tabs=[tab_tlaxcala, tab_dorados, tab_mineros])
+path = "data/metrics_intervals_alebrijes.csv"
+group, source = get_groups_and_source(path)
+dorados_p = get_metrics_from_round_and_team(4, "Alebrijes", TOOLTIPS)
+dorados_p = plot_annual_metrics(dorados_p, source)
+tab_alebrijes = setup_axis_style(dorados_p, "Alebrijes")
+
+p = Tabs(tabs=[tab_tlaxcala, tab_dorados, tab_mineros, tab_alebrijes])
 script_interval, div_interval = components(p)
 fileLoader = FileSystemLoader("reports")
 env = Environment(loader=fileLoader)

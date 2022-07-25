@@ -21,6 +21,16 @@ def add_line_two_sd(p, location):
     return p
 
 
+def add_horizontal_line(p, location):
+    first_line = Span(
+        location=location,
+        dimension="width",
+        line_width=1,
+    )
+    p.add_layout(first_line)
+    return p
+
+
 def add_line_three_sd(p, location):
     first_line = Span(
         location=location,
@@ -59,3 +69,54 @@ class Plotter_Step_Goals_and_xG:
         p.step(x="Date", y="Goals", source=self.__data, color=color)
         p.line(x="Date", y="Goals", source=self.__data, color=RGB(54, 162, 235, 0.0))
         return components(p)
+
+
+def add_patch_color(p, x, y, color):
+    p.patch(
+        x,
+        y,
+        color=RGB(*color),
+        line_width=0,
+    )
+    return p
+
+
+def direct_metrics(p, x, color):
+    y = [9, 13, 13, 9]
+    return add_patch_color(p, x, y, color)
+
+
+def indirect_metrics(p, x, color):
+    y = [0, 6, 6, 0]
+    return add_patch_color(p, x, y, color)
+
+
+def good_direct_metrics(p):
+    x = [1, 1, 2, 2]
+    color = [154, 205, 50, 0.1]
+    return direct_metrics(p, x, color)
+
+
+def better_direct_metrics(p):
+    x = [2, 2, 3, 3]
+    color = [154, 205, 50, 0.3]
+    return direct_metrics(p, x, color)
+
+
+def bad_direct_metrics(p):
+    x = [-2, -2, -1, -1]
+    color = [255, 140, 0, 0.1]
+    return direct_metrics(p, x, color)
+
+
+def worst_direct_metrics(p):
+    x = [-3, -3, -2, -2]
+    color = [255, 140, 0, 0.3]
+    return direct_metrics(p, x, color)
+
+def add_patch_to_direct_metrics(p):
+    p = bad_direct_metrics(p)
+    p = worst_direct_metrics(p)
+    p = good_direct_metrics(p)
+    p = better_direct_metrics(p)
+    return p
