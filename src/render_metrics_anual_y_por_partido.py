@@ -17,36 +17,19 @@ from xg_plots import (
 )
 
 
-equipos_rivales = ["Tapatío", "Tepatitlán", "Mineros", "Cancún", "Venados", "Pumas"]
-possession = ["Cimarrones", "Rivales"]
 colors = ["#718dbf", "#e84d60"]
+df_possiession = pd.read_csv("data/horizontal_bars.csv").sort_values(by=["Cimarrones"])
+possession = [df_possiession.columns[3], "Rivales"]
 TOOLTIPS = [
     ("Juego", "@{match}"),
     ("Sistema rival", "@{scheme_rival}"),
-    ("Sistema Cimarrones", "@{scheme_team}"),
+    (f"Sistema {df_possiession.columns[3]}", "@{scheme_team}"),
 ]
-match = [
-    "Cimarrones - Tapatío 2:1",
-    "Cimarrones - Tepatitlán 2:0",
-    "Mineros - Cimarrones 1:1",
-    "Cimarrones - Cancún 0:1",
-    "Cimarrones - Venados 1:1",
-    "Pumas - Cimarrones 2:2",
-]
-data = {
-    "rival_teams": equipos_rivales,
-    "match": match,
-    "Rivales": [34, 61, 36, 31, 49, 59],
-    "Cimarrones": [66, 39, 64, 69, 51, 41],
-    "scheme_rival": ["3-4-3", "4-2-3-1", "4-1-4-1", "4-5-1", "4-2-3-1", "3-4-3"],
-    "scheme_team": ["4-3-1-2", "4-3-1-2", "4-3-1-2", "4-3-1-2", "3-4-1-2", "3-4-3"],
-}
-df_possiession = pd.DataFrame(data).sort_values(by=["Cimarrones"])
 sorted_equipos_rivales = df_possiession["rival_teams"]
 p = figure(
     y_range=sorted_equipos_rivales,
     height=250,
-    title="Posesión en los partidos de los Cimarrones de Sonora",
+    title=f"Posesión en los partidos de los {df_possiession.columns[3]}",
     toolbar_location=None,
     tools="hover",
     tooltips=TOOLTIPS,
@@ -63,7 +46,7 @@ p.outline_line_color = None
 p.legend.location = "top_left"
 p.legend.orientation = "horizontal"
 p.xaxis.axis_label = "Posesión (%)"
-p.yaxis.axis_label = "Cimarrones vs"
+p.yaxis.axis_label = f"{df_possiession.columns[3]} vs"
 
 script, div = components(p)
 
