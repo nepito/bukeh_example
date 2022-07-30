@@ -115,6 +115,7 @@ def worst_direct_metrics(p):
     color = [255, 140, 0, 0.3]
     return direct_metrics(p, x, color)
 
+
 def add_patch_to_direct_metrics(p):
     p = bad_direct_metrics(p)
     p = worst_direct_metrics(p)
@@ -124,14 +125,16 @@ def add_patch_to_direct_metrics(p):
 
 
 pd.set_option("mode.chained_assignment", None)
-class Plotter_Intervals_From_Rivals():
+
+
+class Plotter_Intervals_From_Rivals:
     def __init__(self, path):
         self.read_data(path)
         self.teams = self.metrics.rival.unique()
 
     def read_data(self, path):
         self.metrics = pd.read_csv(path)
-        
+
     def plot_intervals(self, round, TOOLTIPS):
         self.get_groups_and_source(round)
         self.get_metrics_from_round_and_team(round, TOOLTIPS)
@@ -141,7 +144,7 @@ class Plotter_Intervals_From_Rivals():
     def get_groups_and_source(self, round):
         team = self.teams[-round]
         metrics = self.metrics[self.metrics.rival == team]
-        metrics.loc[:,('max')] = metrics.loc[:,('values')] + 0.1
+        metrics.loc[:, ("max")] = metrics.loc[:, ("values")] + 0.1
         self.group = metrics.groupby("metrics")
         self.source = ColumnDataSource(self.group)
         self.group = metrics[::-1]["metrics"]
@@ -160,7 +163,6 @@ class Plotter_Intervals_From_Rivals():
         )
         self.p.title.text_font_size = "12pt"
 
-
     def plot_annual_metrics(self):
         self.p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=self.source)
         self.p = add_patch_color(self.p, [1, 1, 2, 2], [0, 6, 6, 0], [255, 140, 0, 0.1])
@@ -174,7 +176,6 @@ class Plotter_Intervals_From_Rivals():
         self.p = add_line_three_sd(self.p, 3)
         self.p = add_horizontal_line(self.p, 6)
         self.p = add_horizontal_line(self.p, 9)
-
 
     def setup_axis_style(self, round):
         titulo = self.teams[-round]

@@ -62,7 +62,7 @@ TOOLTIPS = [
 
 path = "data/metrics_intervals_last-five-matches.csv"
 plotter = Plotter_Intervals_From_Rivals(path)
-tabls = [plotter.plot_intervals(x+1, TOOLTIPS) for x in range(5)]
+tabls = [plotter.plot_intervals(x + 1, TOOLTIPS) for x in range(5)]
 p = Tabs(tabs=tabls)
 script_interval, div_interval = components(p)
 fileLoader = FileSystemLoader("reports")
