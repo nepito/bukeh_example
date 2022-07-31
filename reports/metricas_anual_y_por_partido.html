@@ -14,18 +14,20 @@
     </head>
     <body>
 		<div class="container-lg">
-      <h1>Cimarrones de Sonora F.C.</h1>
+      <h1>{{team}}</h1>
       <h2>Métricas de referencia</h2>
             <p class="lead" style="font-size:1.7em">
-            En la figura 1 podemos observar la posesión en algunos partidos de los Cimarrones. Las barras
-            horizontales azules representa la posesión de los Cimarrones y las barras rojas a sus
-            rivales. Tomamos solo seis partidos para hacer una muestra de esta métrica.
+            En la figura 1 podemos observar la posesión en los partidos del {{team}}. Las barras
+            horizontales amarillas representa la posesión de {{team}} y las barras rojas a sus
+            rivales. Tomamos los partidos de la temporada pasada para hacer una muestra de esta 
+            métrica.
             </p>
             <p class="lead" style="font-size:1.7em">
-            La primer barra representa el partido de Cimarrones vs Cancún (con marcador
-            0 a 1). Al pasar el cursor podemos ver el sistema de juegos de cada equipo: Cimarrones
-            jugaron con 4-3-1-2 y Cancún un sistema 4-5-1. La última barra corresponde al partido
-            contra Tepatitlán, podemos notar que Cimarrones ganó 2 a 0 con un posesión menor al 40%.
+            La primer barra representa el partido de {{primer_partido}} (con marcador
+            {{marcador}}). Al pasar el cursor podemos ver el sistema de juegos de cada equipo: {{team}}
+            jugaron con {{schema_team}} y {{rival}} con un sistema {{schema_rival}}. La última barra corresponde al partido
+            contra {{ultimo_rival}}, podemos notar que {{team}} tuvo su menor posesión con alrededor
+            de {{menor_posesion}}%.
             </p>
         </div>
     <div class="row">
@@ -34,7 +36,7 @@
         <figure class="figure">
 		{{ script|safe }} {{ div|safe }}
     <figcaption class="figure-caption text-end"><strong>Figura 1.</strong> Posesión de los
-    Cimarrones (barras en azul) y sus rivales (barras en rojo).</figcaption>
+    {{team}} (barras en azul) y sus rivales (barras en rojo).</figcaption>
     </figure>
 		</div>
 	    </div>
@@ -42,7 +44,7 @@
 		<div class="container-lg">
       <h2>Métricas en el torneo presente</h2>
             <p class="lead" style="font-size:1.7em">
-            La figura 2 muestra algunas métricas para los partidos jugados por los Cimarrones en este
+            La figura 2 muestra algunas métricas para los partidos jugados por {{team}} en este
             torneo. La barra central de color verde reperesenta el promedio anual para cada una
             de las variables. En el 67% de los partidos jugados, las metricas cayeron en ese
             intervalo. Las líneas punteadas de color naranja representan el 95% de los eventos y
@@ -54,11 +56,6 @@
             promedio anual. En la parte superior podemos ver una pestaña para cada uno de los partidos
             jugados en este torneo.
             </p>
-            <p class="lead" style="font-size:1.7em">
-            En su primer partido, Cimarrones solo alcanzó un xG de 0.33, menor al ~1.5
-            correspondiente al promedio del año pasado. Las pérdidas bajas fueron de 9 (y el
-            promedio del año fue de 16).
-            </p>
         </div>
     <div class="row">
       <div class="col-sm-3"></div>
@@ -66,19 +63,10 @@
         <figure class="figure">
 		{{ script_interval|safe }} {{ div_interval|safe }}
     <figcaption class="figure-caption text-end"><strong>Figura 2.</strong> Métricas de los últimos
-    partidos de los Cimarrones. La barra central verde representa el promedio de la métrica para del
+    partidos de {{team}}. La barra central verde representa el promedio de la métrica para del
     año pasado.</figcaption>
     </figure>
 	    </div>
 	    </div>
-		<div class="container-lg">
-            <p class="lead" style="font-size:1.7em">
-            En el partido contra Mineros podemos ver que la recuperación y la pérdida en medio campo
-            fueron mayores al promedio del año pasado. La posesión y los pases por posesión
-            de Cimarrones fue menor al promedio, de 27% y de dos pases por posesión,
-            respectivamente. Por otra parte, las pérdidas en el campo rival mejoraron con respecto
-            al promedio anual, 43 pérdidas comparadas a las 47 que promediaron el año pasado.
-            </p>
-        </div>
     </body>
 </html>

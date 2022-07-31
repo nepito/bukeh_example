@@ -4,24 +4,30 @@ from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
-from bokeh.colors import RGB
 from bokeh.models import Panel, Tabs
 import pandas as pd
 from xg_plots import (
-    add_line_two_sd,
-    add_line_three_sd,
-    add_horizontal_line,
-    add_patch_color,
-    indirect_metrics,
-    add_patch_to_direct_metrics,
     Plotter_Intervals_From_Rivals,
 )
 
 
-colors = ["#718dbf", "#e84d60"]
+colors = ["#FFC300", "#DF0404"]
 df_possiession = pd.read_csv("data/output_morelia.csv")
 team = df_possiession.columns[3]
 df_possiession = df_possiession.sort_values(by=[team])
+primer_partido = list(df_possiession.match)[-1]
+primer_partido = primer_partido.split(" ")
+marcador = primer_partido.pop().replace(":", " a ")
+primer_partido = " ".join(primer_partido).replace("-", "vs")
+rival = list(df_possiession.rival_teams)[-1]
+schema_rival = list(df_possiession.scheme_rival)[-1]
+schema_team = list(df_possiession.scheme_team)[-1]
+ultimo_partido = list(df_possiession.match)[0]
+ultimo_partido = ultimo_partido.split(" ")
+ultimo_marcador = ultimo_partido.pop().replace(":", " a ")
+ultimo_partido = " ".join(ultimo_partido).replace("-", "vs")
+ultimo_rival = list(df_possiession.rival_teams)[0]
+menor_posesion = list(df_possiession[team])[0]
 possession = [df_possiession.columns[3], "Rivales"]
 TOOLTIPS = [
     ("Juego", "@{match}"),
@@ -60,7 +66,7 @@ TOOLTIPS = [
 ]
 
 
-path = "data/metrics_intervals_last-five-matches.csv"
+path = "data/metrics_intervals_last-five-matches_morelia.csv"
 plotter = Plotter_Intervals_From_Rivals(path)
 tabls = [plotter.plot_intervals(x + 1, TOOLTIPS) for x in range(5)]
 p = Tabs(tabs=tabls)
@@ -73,5 +79,15 @@ rendered = env.get_template("metricas_anual_y_por_partido.html").render(
     div=div,
     script_interval=script_interval,
     div_interval=div_interval,
+    team = "Atlético Morelia",
+    primer_partido = primer_partido,
+    marcador = marcador,
+    schema_rival = schema_rival,
+    schema_team = schema_team,
+    rival = rival,
+    ultimo_partido = ultimo_partido,
+    ultimo_marcador = ultimo_marcador,
+    ultimo_rival = ultimo_rival,
+    menor_posesion = menor_posesion,
 )
 print(rendered)
