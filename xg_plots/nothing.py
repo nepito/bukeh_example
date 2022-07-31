@@ -186,4 +186,7 @@ class Plotter_Intervals_From_Rivals:
         return tab
 
 
-COLOR = {"Morelia": ["#FFC300", "#DF0404"], "Cimarrones": ["#718dbf", "#e84d60"],}
+COLOR = {
+    "Morelia": ["#FFC300", "#DF0404"],
+    "Cimarrones": ["#718dbf", "#e84d60"],
+}
