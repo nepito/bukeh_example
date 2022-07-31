@@ -153,7 +153,7 @@ class Plotter_Intervals_From_Rivals:
         team = self.teams[-round]
         self.p = figure(
             y_range=self.group,
-            x_range=(-4, 4),
+            x_range=(-4, 5.5),
             width=500,
             height=550,
             toolbar_location=None,
@@ -184,3 +184,6 @@ class Plotter_Intervals_From_Rivals:
         self.p.outline_line_color = None
         tab = Panel(child=self.p, title=titulo)
         return tab
+
+
+COLOR = {"Morelia": ["#FFC300", "#DF0404"], "Cimarrones": ["#718dbf", "#e84d60"],}
