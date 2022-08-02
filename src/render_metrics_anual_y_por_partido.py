@@ -92,6 +92,6 @@ rendered = env.get_template("metricas_anual_y_por_partido.html").render(
     ultimo_marcador=ultimo_marcador,
     ultimo_rival=ultimo_rival,
     menor_posesion=menor_posesion,
-    color = COLOR_IN_TEXT["Correcaminos"],
+    color=COLOR_IN_TEXT["Correcaminos"],
 )
 print(rendered)
