@@ -12,7 +12,7 @@ from xg_plots import (
 
 
 colors = ["#FFC300", "#DF0404"]
-df_possiession = pd.read_csv("data/output_morelia.csv")
+df_possiession = pd.read_csv("data/output_correcaminos.csv")
 team = df_possiession.columns[3]
 df_possiession = df_possiession.sort_values(by=[team])
 primer_partido = list(df_possiession.match)[-1]
@@ -66,8 +66,8 @@ TOOLTIPS = [
 ]
 
 
-path = "data/metrics_intervals_last-five-matches_morelia.csv"
-plotter = Plotter_Intervals_From_Rivals(path)
+path = "data/metrics_intervals_correcaminos.csv"
+plotter = Plotter_Intervals_From_Rivals(path, team)
 tabls = [plotter.plot_intervals(x + 1, TOOLTIPS) for x in range(5)]
 p = Tabs(tabs=tabls)
 script_interval, div_interval = components(p)
@@ -79,7 +79,7 @@ rendered = env.get_template("metricas_anual_y_por_partido.html").render(
     div=div,
     script_interval=script_interval,
     div_interval=div_interval,
-    team="Atlético Morelia",
+    team=team,
     primer_partido=primer_partido,
     marcador=marcador,
     schema_rival=schema_rival,

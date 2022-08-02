@@ -128,7 +128,8 @@ pd.set_option("mode.chained_assignment", None)
 
 
 class Plotter_Intervals_From_Rivals:
-    def __init__(self, path):
+    def __init__(self, path, team):
+        self.team = team
         self.read_data(path)
         self.teams = self.metrics.rival.unique()
 
@@ -159,7 +160,7 @@ class Plotter_Intervals_From_Rivals:
             toolbar_location=None,
             tools="hover",
             tooltips=TOOLTIPS,
-            title=f"Métricas de Cimarrones de Sonora \n Jornada {round}: {team}",
+            title=f"Métricas de {self.team} \n Jornada {round}: {team}",
         )
         self.p.title.text_font_size = "12pt"
 
