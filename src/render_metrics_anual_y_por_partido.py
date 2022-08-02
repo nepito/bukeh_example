@@ -8,10 +8,13 @@ from bokeh.models import Panel, Tabs
 import pandas as pd
 from xg_plots import (
     Plotter_Intervals_From_Rivals,
+    COLOR,
+    COLOR_IN_TEXT,
 )
+from xg_plots.nothing import COLOR_IN_TEXT
 
 
-colors = ["#FFC300", "#DF0404"]
+colors = COLOR["Correcaminos"]
 df_possiession = pd.read_csv("data/output_correcaminos.csv")
 team = df_possiession.columns[3]
 df_possiession = df_possiession.sort_values(by=[team])
@@ -89,5 +92,6 @@ rendered = env.get_template("metricas_anual_y_por_partido.html").render(
     ultimo_marcador=ultimo_marcador,
     ultimo_rival=ultimo_rival,
     menor_posesion=menor_posesion,
+    color = COLOR_IN_TEXT["Correcaminos"],
 )
 print(rendered)

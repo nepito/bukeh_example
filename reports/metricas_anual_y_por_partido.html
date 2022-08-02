@@ -18,7 +18,7 @@
       <h2>Métricas de referencia</h2>
             <p class="lead" style="font-size:1.7em">
             En la figura 1 podemos observar la posesión en los partidos del {{team}}. Las barras
-            horizontales amarillas representa la posesión de {{team}} y las barras rojas a sus
+            horizontales en {{color[0]}} representa la posesión de {{team}} y las barras en {{color[1]}} a sus
             rivales. Tomamos los partidos de la temporada pasada para hacer una muestra de esta 
             métrica.
             </p>
@@ -36,7 +36,7 @@
         <figure class="figure">
 		{{ script|safe }} {{ div|safe }}
     <figcaption class="figure-caption text-end"><strong>Figura 1.</strong> Posesión de los
-    {{team}} (barras en azul) y sus rivales (barras en rojo).</figcaption>
+    {{team}} (barras en {{color[0]}}) y sus rivales (barras en {{color[1]}}).</figcaption>
     </figure>
 		</div>
 	    </div>

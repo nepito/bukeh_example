@@ -190,4 +190,14 @@ class Plotter_Intervals_From_Rivals:
 COLOR = {
     "Morelia": ["#FFC300", "#DF0404"],
     "Cimarrones": ["#718dbf", "#e84d60"],
+    "Raya2": ["#191970", "#C0C0C0"],
+    "Correcaminos": ["#FF4500", "#191970"],
+}
+
+
+COLOR_IN_TEXT = {
+    "Morelia": ["amarillo", "rojo"],
+    "Cimarrones": ["azul", "rojo"],
+    "Raya2": ["azul", "gris"],
+    "Correcaminos": ["naranja", "azul"],
 }
