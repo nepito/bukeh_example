@@ -1,17 +1,14 @@
-import re
 from jinja2 import Environment, FileSystemLoader
-from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
-from bokeh.models import Panel, Tabs
+from bokeh.models import Tabs
 import pandas as pd
 from xg_plots import (
     Plotter_Intervals_From_Rivals,
     COLOR,
     COLOR_IN_TEXT,
 )
-from xg_plots.nothing import COLOR_IN_TEXT
 
 
 colors = COLOR["Correcaminos"]

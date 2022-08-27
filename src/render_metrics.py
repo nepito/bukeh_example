@@ -1,8 +1,5 @@
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader
-from bokeh.plotting import figure, ColumnDataSource
-from bokeh.embed import components
-from bokeh.colors import RGB
 from xg_plots import Plotter_Step_Goals_and_xG
 
 metrics = pd.read_csv("data/normalized_metrics.csv")

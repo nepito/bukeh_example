@@ -3,7 +3,7 @@ from bokeh.colors import RGB
 from bokeh.models import Span
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.embed import components
-from bokeh.models import Panel, Tabs
+from bokeh.models import Panel
 
 
 def return_one():
