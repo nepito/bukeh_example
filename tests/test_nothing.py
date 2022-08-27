@@ -9,6 +9,7 @@ def test_return_one():
     obtained = xgp.return_one()
     assert expected == obtained
 
+
 @pytest.mark.xfail
 def test_example_bar_plots():
     set_up_tests()
