@@ -1,12 +1,8 @@
 name: tests
 on:
-  pull_request:
-    branches:
-      - develop
-      - master
   push:
     branches:
-      - master
+      - develop
 jobs:
   actions:
     runs-on: ubuntu-20.04
@@ -29,4 +25,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: nepolin/bukeh_example:${{github.sha}}
+        tags: nepolin/bukeh_example:latest
