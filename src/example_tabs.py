@@ -1,13 +1,6 @@
 from jinja2 import Environment, FileSystemLoader
-from bokeh.plotting import figure
 from bokeh.embed import components
-from bokeh.models import ColumnDataSource
-from bokeh.sampledata.sprint import sprint
-from bokeh.colors import RGB
-import pandas as pd
-from xg_plots import add_line_two_sd, add_line_three_sd
 
-from bokeh.io import show
 from bokeh.models import Panel, Tabs
 from bokeh.plotting import figure
 

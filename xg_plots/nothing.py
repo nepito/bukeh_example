@@ -3,6 +3,7 @@ from bokeh.colors import RGB
 from bokeh.models import Span
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.embed import components
+from bokeh.models import Panel
 
 
 def return_one():
@@ -114,9 +115,89 @@ def worst_direct_metrics(p):
     color = [255, 140, 0, 0.3]
     return direct_metrics(p, x, color)
 
+
 def add_patch_to_direct_metrics(p):
     p = bad_direct_metrics(p)
     p = worst_direct_metrics(p)
     p = good_direct_metrics(p)
     p = better_direct_metrics(p)
     return p
+
+
+pd.set_option("mode.chained_assignment", None)
+
+
+class Plotter_Intervals_From_Rivals:
+    def __init__(self, path, team):
+        self.team = team
+        self.read_data(path)
+        self.teams = self.metrics.rival.unique()
+
+    def read_data(self, path):
+        self.metrics = pd.read_csv(path)
+
+    def plot_intervals(self, round, TOOLTIPS):
+        self.get_groups_and_source(round)
+        self.get_metrics_from_round_and_team(round, TOOLTIPS)
+        self.plot_annual_metrics()
+        return self.setup_axis_style(round)
+
+    def get_groups_and_source(self, round):
+        team = self.teams[-round]
+        metrics = self.metrics[self.metrics.rival == team]
+        metrics.loc[:, ("max")] = metrics.loc[:, ("values")] + 0.1
+        self.group = metrics.groupby("metrics")
+        self.source = ColumnDataSource(self.group)
+        self.group = metrics[::-1]["metrics"]
+
+    def get_metrics_from_round_and_team(self, round, TOOLTIPS):
+        team = self.teams[-round]
+        self.p = figure(
+            y_range=self.group,
+            x_range=(-4, 5.5),
+            width=500,
+            height=550,
+            toolbar_location=None,
+            tools="hover",
+            tooltips=TOOLTIPS,
+            title=f"Métricas de {self.team} \n Jornada {round}: {team}",
+        )
+        self.p.title.text_font_size = "12pt"
+
+    def plot_annual_metrics(self):
+        self.p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=self.source)
+        self.p = add_patch_color(self.p, [1, 1, 2, 2], [0, 6, 6, 0], [255, 140, 0, 0.1])
+        self.p = add_patch_color(self.p, [2, 2, 3, 3], [0, 6, 6, 0], [255, 140, 0, 0.3])
+        self.p = add_patch_color(self.p, [-2, -2, -1, -1], [0, 6, 6, 0], [154, 205, 50, 0.1])
+        self.p = add_patch_color(self.p, [-3, -3, -2, -2], [0, 6, 6, 0], [154, 205, 50, 0.3])
+        self.p = add_patch_to_direct_metrics(self.p)
+        self.p = add_line_two_sd(self.p, -2)
+        self.p = add_line_two_sd(self.p, 2)
+        self.p = add_line_three_sd(self.p, -3)
+        self.p = add_line_three_sd(self.p, 3)
+        self.p = add_horizontal_line(self.p, 6)
+        self.p = add_horizontal_line(self.p, 9)
+
+    def setup_axis_style(self, round):
+        titulo = self.teams[-round]
+        self.p.xaxis.minor_tick_line_color = None
+        self.p.ygrid.grid_line_color = None
+        self.p.outline_line_color = None
+        tab = Panel(child=self.p, title=titulo)
+        return tab
+
+
+COLOR = {
+    "Morelia": ["#FFC300", "#DF0404"],
+    "Cimarrones": ["#718dbf", "#e84d60"],
+    "Raya2": ["#191970", "#C0C0C0"],
+    "Correcaminos": ["#FF4500", "#191970"],
+}
+
+
+COLOR_IN_TEXT = {
+    "Morelia": ["amarillo", "rojo"],
+    "Cimarrones": ["azul", "rojo"],
+    "Raya2": ["azul", "gris"],
+    "Correcaminos": ["naranja", "azul"],
+}

@@ -1,52 +1,44 @@
-import re
 from jinja2 import Environment, FileSystemLoader
-from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
-from bokeh.colors import RGB
-from bokeh.models import Panel, Tabs
+from bokeh.models import Tabs
 import pandas as pd
 from xg_plots import (
-    add_line_two_sd,
-    add_line_three_sd,
-    add_horizontal_line,
-    add_patch_color,
-    indirect_metrics,
-    add_patch_to_direct_metrics,
+    Plotter_Intervals_From_Rivals,
+    COLOR,
+    COLOR_IN_TEXT,
 )
 
 
-equipos_rivales = ["Tapatío", "Tepatitlán", "Mineros", "Cancún", "Venados", "Pumas"]
-possession = ["Cimarrones", "Rivales"]
-colors = ["#718dbf", "#e84d60"]
+colors = COLOR["Correcaminos"]
+df_possiession = pd.read_csv("data/output_correcaminos.csv")
+team = df_possiession.columns[3]
+df_possiession = df_possiession.sort_values(by=[team])
+primer_partido = list(df_possiession.match)[-1]
+primer_partido = primer_partido.split(" ")
+marcador = primer_partido.pop().replace(":", " a ")
+primer_partido = " ".join(primer_partido).replace("-", "vs")
+rival = list(df_possiession.rival_teams)[-1]
+schema_rival = list(df_possiession.scheme_rival)[-1]
+schema_team = list(df_possiession.scheme_team)[-1]
+ultimo_partido = list(df_possiession.match)[0]
+ultimo_partido = ultimo_partido.split(" ")
+ultimo_marcador = ultimo_partido.pop().replace(":", " a ")
+ultimo_partido = " ".join(ultimo_partido).replace("-", "vs")
+ultimo_rival = list(df_possiession.rival_teams)[0]
+menor_posesion = list(df_possiession[team])[0]
+possession = [df_possiession.columns[3], "Rivales"]
 TOOLTIPS = [
     ("Juego", "@{match}"),
     ("Sistema rival", "@{scheme_rival}"),
-    ("Sistema Cimarrones", "@{scheme_team}"),
+    (f"Sistema {df_possiession.columns[3]}", "@{scheme_team}"),
 ]
-match = [
-    "Cimarrones - Tapatío 2:1",
-    "Cimarrones - Tepatitlán 2:0",
-    "Mineros - Cimarrones 1:1",
-    "Cimarrones - Cancún 0:1",
-    "Cimarrones - Venados 1:1",
-    "Pumas - Cimarrones 2:2",
-]
-data = {
-    "rival_teams": equipos_rivales,
-    "match": match,
-    "Rivales": [34, 61, 36, 31, 49, 59],
-    "Cimarrones": [66, 39, 64, 69, 51, 41],
-    "scheme_rival": ["3-4-3", "4-2-3-1", "4-1-4-1", "4-5-1", "4-2-3-1", "3-4-3"],
-    "scheme_team": ["4-3-1-2", "4-3-1-2", "4-3-1-2", "4-3-1-2", "3-4-1-2", "3-4-3"],
-}
-df_possiession = pd.DataFrame(data).sort_values(by=["Cimarrones"])
 sorted_equipos_rivales = df_possiession["rival_teams"]
 p = figure(
     y_range=sorted_equipos_rivales,
-    height=250,
-    title="Posesión en los partidos de los Cimarrones de Sonora",
+    height=350,
+    title=f"Posesión en los partidos de los {df_possiession.columns[3]}",
     toolbar_location=None,
     tools="hover",
     tooltips=TOOLTIPS,
@@ -63,7 +55,7 @@ p.outline_line_color = None
 p.legend.location = "top_left"
 p.legend.orientation = "horizontal"
 p.xaxis.axis_label = "Posesión (%)"
-p.yaxis.axis_label = "Cimarrones vs"
+p.yaxis.axis_label = f"{df_possiession.columns[3]} vs"
 
 script, div = components(p)
 
@@ -74,85 +66,10 @@ TOOLTIPS = [
 ]
 
 
-def get_groups_and_source(path):
-    metrics = pd.read_csv(path)
-    metrics["max"] = metrics["values"] + 0.1
-    group = metrics.groupby("metrics")
-    source = ColumnDataSource(group)
-    group = metrics[::-1]["metrics"]
-    return group, source
-
-
-path = "data/metrics_intervals_tlaxcala.csv"
-group, source = get_groups_and_source(path)
-
-
-def get_metrics_from_round_and_team(round, team, TOOLTIPS):
-    p = figure(
-        y_range=group,
-        x_range=(-4, 4),
-        width=500,
-        height=550,
-        toolbar_location=None,
-        tools="hover",
-        tooltips=TOOLTIPS,
-        title=f"Métricas de Cimarrones de Sonora \n Jornada {round}: {team}",
-    )
-    p.title.text_font_size = "12pt"
-    return p
-
-
-tlaxcala_p = get_metrics_from_round_and_team(1, "Tlaxcala", TOOLTIPS)
-
-
-def plot_annual_metrics(p, source):
-    p.hbar(y="metrics", left="values_max", right="max_max", height=0.4, source=source)
-    p = add_patch_color(p, [1, 1, 2, 2], [0, 6, 6, 0], [255, 140, 0, 0.1])
-    p = add_patch_color(p, [2, 2, 3, 3], [0, 6, 6, 0], [255, 140, 0, 0.3])
-    p = add_patch_color(p, [-2, -2, -1, -1], [0, 6, 6, 0], [154, 205, 50, 0.1])
-    p = add_patch_color(p, [-3, -3, -2, -2], [0, 6, 6, 0], [154, 205, 50, 0.3])
-    p = add_patch_to_direct_metrics(p)
-    p = add_line_two_sd(p, -2)
-    p = add_line_two_sd(p, 2)
-    p = add_line_three_sd(p, -3)
-    p = add_line_three_sd(p, 3)
-    p = add_horizontal_line(p, 6)
-    p = add_horizontal_line(p, 9)
-    return p
-
-
-tlaxcala_p = plot_annual_metrics(tlaxcala_p, source)
-
-
-def setup_axis_style(p, titulo):
-    p.xaxis.minor_tick_line_color = None
-    p.ygrid.grid_line_color = None
-    p.outline_line_color = None
-    tab = Panel(child=p, title=titulo)
-    return tab
-
-
-tab_tlaxcala = setup_axis_style(tlaxcala_p, "Tlaxcala")
-
-path = "data/metrics_intervals_dorados.csv"
-group, source = get_groups_and_source(path)
-dorados_p = get_metrics_from_round_and_team(2, "Dorados", TOOLTIPS)
-dorados_p = plot_annual_metrics(dorados_p, source)
-tab_dorados = setup_axis_style(dorados_p, "Dorados")
-
-path = "data/metrics_intervals_mineros.csv"
-group, source = get_groups_and_source(path)
-dorados_p = get_metrics_from_round_and_team(3, "Mineros", TOOLTIPS)
-dorados_p = plot_annual_metrics(dorados_p, source)
-tab_mineros = setup_axis_style(dorados_p, "Mineros")
-
-path = "data/metrics_intervals_alebrijes.csv"
-group, source = get_groups_and_source(path)
-dorados_p = get_metrics_from_round_and_team(4, "Alebrijes", TOOLTIPS)
-dorados_p = plot_annual_metrics(dorados_p, source)
-tab_alebrijes = setup_axis_style(dorados_p, "Alebrijes")
-
-p = Tabs(tabs=[tab_tlaxcala, tab_dorados, tab_mineros, tab_alebrijes])
+path = "data/metrics_intervals_correcaminos.csv"
+plotter = Plotter_Intervals_From_Rivals(path, team)
+tabls = [plotter.plot_intervals(x + 1, TOOLTIPS) for x in range(5)]
+p = Tabs(tabs=tabls)
 script_interval, div_interval = components(p)
 fileLoader = FileSystemLoader("reports")
 env = Environment(loader=fileLoader)
@@ -162,5 +79,16 @@ rendered = env.get_template("metricas_anual_y_por_partido.html").render(
     div=div,
     script_interval=script_interval,
     div_interval=div_interval,
+    team=team,
+    primer_partido=primer_partido,
+    marcador=marcador,
+    schema_rival=schema_rival,
+    schema_team=schema_team,
+    rival=rival,
+    ultimo_partido=ultimo_partido,
+    ultimo_marcador=ultimo_marcador,
+    ultimo_rival=ultimo_rival,
+    menor_posesion=menor_posesion,
+    color=COLOR_IN_TEXT["Correcaminos"],
 )
 print(rendered)
