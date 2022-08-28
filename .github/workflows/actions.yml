@@ -30,4 +30,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: bukeh_example:${GITHUB_REF##*/}
+        tags: ${GITHUB_REF##*/}
