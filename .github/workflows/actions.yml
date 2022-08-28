@@ -30,4 +30,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: latest
+        tags: ${{ steps.extract_branch.outputs.branch }}
