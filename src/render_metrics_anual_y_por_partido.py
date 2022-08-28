@@ -11,8 +11,8 @@ from xg_plots import (
 )
 
 
-colors = COLOR["Correcaminos"]
-df_possiession = pd.read_csv("data/output_correcaminos.csv")
+colors = COLOR["Morelia"]
+df_possiession = pd.read_csv("data/output_morelia.csv")
 team = df_possiession.columns[3]
 df_possiession = df_possiession.sort_values(by=[team])
 primer_partido = list(df_possiession.match)[-1]
@@ -66,7 +66,7 @@ TOOLTIPS = [
 ]
 
 
-path = "data/metrics_intervals_correcaminos.csv"
+path = "data/metrics_intervals_morelia.csv"
 plotter = Plotter_Intervals_From_Rivals(path, team)
 tabls = [plotter.plot_intervals(x + 1, TOOLTIPS) for x in range(5)]
 p = Tabs(tabs=tabls)
