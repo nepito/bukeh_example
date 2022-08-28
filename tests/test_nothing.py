@@ -2,6 +2,7 @@ import hashlib
 import os
 import xg_plots as xgp
 import pytest
+import pandas as pd
 
 
 def test_return_one():
@@ -30,3 +31,15 @@ def test_example_intervals():
 
 def set_up_tests():
     os.system("rm --force salidita.html")
+
+df_possiession = pd.read_csv("tests/data/output_morelia.csv")
+
+def test_get_match():
+    expected_match = "Atlético Morelia vs Tapatío"
+    obtained_match = xgp.get_match(df_possiession, -1)
+    assert obtained_match == expected_match
+
+def test_hover_tooltips():
+    expected_tooltips = [('Juego', '@{match}'), ('Sistema rival', '@{scheme_rival}'), ('Sistema Morelia', '@{scheme_team}')]
+    obtained_tooltips = p.hover.tooltips
+    assert obtained_tooltips == expected_tooltips
