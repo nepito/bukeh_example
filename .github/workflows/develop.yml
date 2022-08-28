@@ -4,7 +4,7 @@ on:
     branches:
       - develop
 jobs:
-  actions:
+  latest:
     runs-on: ubuntu-20.04
     steps:
     - name: Copia repositorio
@@ -25,4 +25,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: nepolin/bukeh_example:latest
+        tags: nepolin/bukeh_example:${{github.job}}
