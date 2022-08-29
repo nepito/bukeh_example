@@ -38,11 +38,16 @@ df_possiession = pd.read_csv("tests/data/output_morelia.csv")
 
 def test_get_match():
     expected_match = "Atlético Morelia vs Tapatío"
-    obtained_match = xgp.get_match(df_possiession, -1)
+    obtained_match, result = xgp.get_match(df_possiession, -1)
+    assert obtained_match == expected_match
+    assert result == "1 a 2"
+    expected_match = "Tlaxcala vs Atlético Morelia"
+    obtained_match, _ = xgp.get_match(df_possiession, 0)
     assert obtained_match == expected_match
 
 
 def test_hover_tooltips():
+    p = xgp.get_bar_plot_of_possession(df_possiession, team = "Morelia")
     expected_tooltips = [
         ("Juego", "@{match}"),
         ("Sistema rival", "@{scheme_rival}"),
