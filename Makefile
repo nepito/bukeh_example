@@ -45,6 +45,9 @@ init: install tests
 install:
 	pip install --editable .
 
+mutants:
+	mutmut run --paths-to-mutate xg_plots
+
 run:
 	bokeh serve --show --port=3535 myapp/main.py
 
