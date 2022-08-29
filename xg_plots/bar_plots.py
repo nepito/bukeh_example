@@ -4,6 +4,7 @@ from xg_plots import (
     COLOR,
 )
 
+
 def get_match(df_possiession, match):
     team = df_possiession.columns[3]
     df_possiession = df_possiession.sort_values(by=[team])

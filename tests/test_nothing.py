@@ -47,7 +47,7 @@ def test_get_match():
 
 
 def test_hover_tooltips():
-    p = xgp.get_bar_plot_of_possession(df_possiession, team = "Morelia")
+    p = xgp.get_bar_plot_of_possession(df_possiession, team="Morelia")
     expected_tooltips = [
         ("Juego", "@{match}"),
         ("Sistema rival", "@{scheme_rival}"),

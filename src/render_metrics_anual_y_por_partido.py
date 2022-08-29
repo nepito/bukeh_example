@@ -14,11 +14,11 @@ from xg_plots import (
 
 df_possiession = pd.read_csv("data/output_morelia.csv")
 team = df_possiession.columns[3]
-primer_partido, marcador = get_match(df_possiession, match = -1)
+primer_partido, marcador = get_match(df_possiession, match=-1)
 rival = list(df_possiession.rival_teams)[-1]
 schema_rival = list(df_possiession.scheme_rival)[-1]
 schema_team = list(df_possiession.scheme_team)[-1]
-ultimo_partido, ultimo_marcador = get_match(df_possiession, match = 0)
+ultimo_partido, ultimo_marcador = get_match(df_possiession, match=0)
 ultimo_rival = list(df_possiession.rival_teams)[0]
 menor_posesion = list(df_possiession[team])[0]
 
