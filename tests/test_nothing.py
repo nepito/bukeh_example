@@ -96,6 +96,8 @@ def test_misc_of_figure():
     assert p.y_range.factors == expected_rivals_teams
     assert p.renderers[0].glyph.fill_color == "#FFC300"
     assert p.renderers[1].glyph.fill_color == "#DF0404"
+    assert p.renderers[1].glyph.height == 0.9
+    assert p.legend.items[1].label["value"] == "Rivales"
 
 
 def test_misc_intervals():
@@ -107,6 +109,7 @@ def test_misc_intervals():
     plotter = xgp.Plotter_Intervals_From_Rivals(path, "Morelia")
     panel = plotter.plot_intervals(1, TOOLTIPS)
     figura = panel.child
+    assert TOOLTIPS == figura.hover.tooltips
     assert figura.title.text == "Métricas de Morelia \n Jornada 1: Tlaxcala"
     metrics = [
         "PDA",
