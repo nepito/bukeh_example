@@ -62,3 +62,35 @@ def test_hover_tooltips():
 def test_legend():
     assert p.legend.location == "top_left"
     assert p.legend.orientation == "horizontal"
+
+
+def test_misc_of_figure():
+    assert p.title.text_font_size == "12pt"
+    assert p.y_range.range_padding == 0.4
+    assert p.ygrid.grid_line_color is None
+    # assert p.axis.minor_tick_line_color is None
+    assert p.outline_line_color is None
+    assert p.xaxis.axis_label == "Posesión (%)"
+    assert p.yaxis.axis_label == "Morelia vs"
+    assert p.title.text == "Posesión en los partidos de los Morelia"
+    assert p.plot_height == 350
+    assert p.toolbar_location is None
+    expected_rivals_teams = [
+        "Pumas",
+        "Venados",
+        "Tepatitlán",
+        "Universidad",
+        "Atlante",
+        "Tampico",
+        "Celaya",
+        "Dorados",
+        "Cancún",
+        "Correcaminos",
+        "Tapatío",
+        "Alebrijes",
+        "Cimarrones",
+        "Raya2",
+        "Mineros",
+        "Tlaxcala",
+    ]
+    assert p.y_range.factors == expected_rivals_teams
