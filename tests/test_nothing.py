@@ -3,7 +3,6 @@ import os
 import xg_plots as xgp
 import pytest
 import pandas as pd
-from bokeh.colors import RGB
 
 
 def test_return_one():
