@@ -3,6 +3,7 @@ import os
 import xg_plots as xgp
 import pytest
 import pandas as pd
+from bokeh.colors import RGB
 
 
 def test_return_one():
@@ -94,3 +95,34 @@ def test_misc_of_figure():
         "Tlaxcala",
     ]
     assert p.y_range.factors == expected_rivals_teams
+    assert p.renderers[0].glyph.fill_color == "#FFC300"
+    assert p.renderers[1].glyph.fill_color == "#DF0404"
+
+
+def test_misc_intervals():
+    TOOLTIPS = [
+        ("Media anual", "@{mean_metrics_mean}"),
+        ("Partido actual", "@{this_match_mean}"),
+    ]
+    path = "data/metrics_intervals_morelia.csv"
+    plotter = xgp.Plotter_Intervals_From_Rivals(path, "Morelia")
+    panel = plotter.plot_intervals(1, TOOLTIPS)
+    figura = panel.child
+    assert figura.title.text == "Métricas de Morelia \n Jornada 1: Tlaxcala"
+    metrics = [
+        "PDA",
+        "Distancia de los disparos",
+        "Pérdidas altas",
+        "Pérdidas medias",
+        "Pérdidas bajas",
+        "Disparos en contra",
+        "Contra ataque",
+        "Pases por posesión",
+        "Posesión",
+        "Recuperación alta",
+        "Recuperación media",
+        "Recuparación baja",
+        "xG",
+    ]
+    assert figura.y_range.factors == metrics
+    # figura.renderers[1].glyph.fill_color == rgba(255, 140, 0, 0.1)
