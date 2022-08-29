@@ -46,8 +46,10 @@ def test_get_match():
     assert obtained_match == expected_match
 
 
+p = xgp.get_bar_plot_of_possession(df_possiession, team="Morelia")
+
+
 def test_hover_tooltips():
-    p = xgp.get_bar_plot_of_possession(df_possiession, team="Morelia")
     expected_tooltips = [
         ("Juego", "@{match}"),
         ("Sistema rival", "@{scheme_rival}"),
@@ -55,3 +57,8 @@ def test_hover_tooltips():
     ]
     obtained_tooltips = p.hover.tooltips
     assert obtained_tooltips == expected_tooltips
+
+
+def test_legend():
+    assert p.legend.location == "top_left"
+    assert p.legend.orientation == "horizontal"
