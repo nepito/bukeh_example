@@ -103,7 +103,7 @@ def test_misc_intervals():
         ("Media anual", "@{mean_metrics_mean}"),
         ("Partido actual", "@{this_match_mean}"),
     ]
-    path = "data/metrics_intervals_morelia.csv"
+    path = "tests/data/metrics_intervals_morelia.csv"
     plotter = xgp.Plotter_Intervals_From_Rivals(path, "Morelia")
     panel = plotter.plot_intervals(1, TOOLTIPS)
     figura = panel.child
