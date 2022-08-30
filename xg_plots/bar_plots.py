@@ -1,7 +1,12 @@
 from jinja2 import Environment, FileSystemLoader
+from bokeh.embed import components
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
-from xg_plots import COLOR, COLOR_IN_TEXT
+from bokeh.embed import components
+from bokeh.models import ColumnDataSource
+from bokeh.plotting import figure
+from bokeh.models import Tabs
+from xg_plots import COLOR, COLOR_IN_TEXT, Plotter_Intervals_From_Rivals
 
 
 def get_match(df_possiession, match):
@@ -43,7 +48,7 @@ def get_bar_plot_of_possession(df_possiession, team):
     p.legend.orientation = "horizontal"
     p.xaxis.axis_label = "Posesión (%)"
     p.yaxis.axis_label = f"{df_possiession.columns[3]} vs"
-    return p
+    return components(p)
 
 
 def get_info_to_write(df_possiession):
@@ -86,3 +91,14 @@ def render_all_report(script, div, script_interval, div_interval, info_to_write,
         color=COLOR_IN_TEXT[team],
     )
     print(rendered)
+
+
+def plot_intrvals_of_the_last_five_matches(path, team):
+    TOOLTIPS = [
+        ("Media anual", "@{mean_metrics_mean}"),
+        ("Partido actual", "@{this_match_mean}"),
+    ]
+    plotter = Plotter_Intervals_From_Rivals(path, team)
+    tabls = [plotter.plot_intervals(x + 1, TOOLTIPS) for x in range(5)]
+    p = Tabs(tabs=tabls)
+    return components(p)
