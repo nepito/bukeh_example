@@ -45,3 +45,23 @@ def get_bar_plot_of_possession(df_possiession, team):
     p.xaxis.axis_label = "Posesión (%)"
     p.yaxis.axis_label = f"{df_possiession.columns[3]} vs"
     return p
+
+
+
+def get_info_to_write(df_possiession):
+    team = df_possiession.columns[3]
+    primer_partido, marcador = get_match(df_possiession, match=-1)
+    ultimo_partido, ultimo_marcador = get_match(df_possiession, match=0)
+    info_to_write = dict(
+    team = team,
+    primer_partido =primer_partido,
+    marcador = marcador,
+    ultimo_partido = ultimo_partido,
+    ultimo_marcador = ultimo_marcador,
+    rival = list(df_possiession.rival_teams)[-1],
+    schema_rival = list(df_possiession.scheme_rival)[-1],
+    schema_team = list(df_possiession.scheme_team)[-1],
+    ultimo_rival = list(df_possiession.rival_teams)[0],
+    menor_posesion = list(df_possiession[team])[0]
+    )
+    return info_to_write

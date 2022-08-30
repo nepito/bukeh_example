@@ -128,3 +128,12 @@ def test_misc_intervals():
     ]
     assert figura.y_range.factors == metrics
     # figura.renderers[1].glyph.fill_color == rgba(255, 140, 0, 0.1)
+
+def test_get_info_to_write():
+    info_to_write = xgp.get_info_to_write(df_possiession)
+    assert info_to_write["primer_partido"] == "Atlético Morelia vs Tapatío"
+    assert info_to_write["marcador"] == "1 a 2"
+    assert info_to_write["ultimo_partido"] == "Tlaxcala vs Atlético Morelia"
+    assert info_to_write["ultimo_marcador"] == "0 a 4"
+    assert info_to_write["ultimo_rival"] == "Pumas"
+    assert info_to_write["rival"] == "Tlaxcala"
