@@ -1,8 +1,7 @@
+from jinja2 import Environment, FileSystemLoader
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
-from xg_plots import (
-    COLOR,
-)
+from xg_plots import COLOR, COLOR_IN_TEXT
 
 
 def get_match(df_possiession, match):
@@ -64,3 +63,26 @@ def get_info_to_write(df_possiession):
         menor_posesion=list(df_possiession[team])[0],
     )
     return info_to_write
+
+
+def render_all_report(script, div, script_interval, div_interval, info_to_write, team):
+    fileLoader = FileSystemLoader("reports")
+    env = Environment(loader=fileLoader)
+    rendered = env.get_template("metricas_anual_y_por_partido.html").render(
+        script=script,
+        div=div,
+        script_interval=script_interval,
+        div_interval=div_interval,
+        team=info_to_write["team"],
+        primer_partido=info_to_write["primer_partido"],
+        marcador=info_to_write["marcador"],
+        schema_rival=info_to_write["schema_rival"],
+        schema_team=info_to_write["schema_team"],
+        rival=info_to_write["rival"],
+        ultimo_partido=info_to_write["ultimo_partido"],
+        ultimo_marcador=info_to_write["ultimo_marcador"],
+        ultimo_rival=info_to_write["ultimo_rival"],
+        menor_posesion=info_to_write["menor_posesion"],
+        color=COLOR_IN_TEXT[team],
+    )
+    print(rendered)
