@@ -136,3 +136,5 @@ def test_get_info_to_write():
     assert info_to_write["ultimo_marcador"] == "0 a 4"
     assert info_to_write["ultimo_rival"] == "Pumas"
     assert info_to_write["rival"] == "Tlaxcala"
+    assert info_to_write["schema_rival"] == "4-4-2"
+    assert info_to_write["schema_team"] == "4-4-1-1"
