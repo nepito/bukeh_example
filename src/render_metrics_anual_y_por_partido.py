@@ -5,29 +5,25 @@ from bokeh.plotting import figure
 from bokeh.models import Tabs
 import pandas as pd
 from xg_plots import (
+    get_match,
     Plotter_Intervals_From_Rivals,
     COLOR,
     COLOR_IN_TEXT,
 )
 
 
-colors = COLOR["Correcaminos"]
-df_possiession = pd.read_csv("data/output_correcaminos.csv")
+df_possiession = pd.read_csv("data/output_morelia.csv")
 team = df_possiession.columns[3]
-df_possiession = df_possiession.sort_values(by=[team])
-primer_partido = list(df_possiession.match)[-1]
-primer_partido = primer_partido.split(" ")
-marcador = primer_partido.pop().replace(":", " a ")
-primer_partido = " ".join(primer_partido).replace("-", "vs")
+primer_partido, marcador = get_match(df_possiession, match=-1)
 rival = list(df_possiession.rival_teams)[-1]
 schema_rival = list(df_possiession.scheme_rival)[-1]
 schema_team = list(df_possiession.scheme_team)[-1]
-ultimo_partido = list(df_possiession.match)[0]
-ultimo_partido = ultimo_partido.split(" ")
-ultimo_marcador = ultimo_partido.pop().replace(":", " a ")
-ultimo_partido = " ".join(ultimo_partido).replace("-", "vs")
+ultimo_partido, ultimo_marcador = get_match(df_possiession, match=0)
 ultimo_rival = list(df_possiession.rival_teams)[0]
 menor_posesion = list(df_possiession[team])[0]
+
+
+colors = COLOR["Morelia"]
 possession = [df_possiession.columns[3], "Rivales"]
 TOOLTIPS = [
     ("Juego", "@{match}"),
@@ -66,7 +62,7 @@ TOOLTIPS = [
 ]
 
 
-path = "data/metrics_intervals_correcaminos.csv"
+path = "data/metrics_intervals_morelia.csv"
 plotter = Plotter_Intervals_From_Rivals(path, team)
 tabls = [plotter.plot_intervals(x + 1, TOOLTIPS) for x in range(5)]
 p = Tabs(tabs=tabls)

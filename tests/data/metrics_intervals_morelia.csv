@@ -1,0 +1,66 @@
+metrics,values,mean_metrics,this_match,rival
+xG,1.5751223949441038,1.221,2.07,Correcaminos UAT
+Recuparación baja,-0.1454740859546285,34.125,33,Correcaminos UAT
+Recuperación media,-0.8352049692631154,30.95,26,Correcaminos UAT
+Recuperación alta,-0.2762038407320582,10.075,9,Correcaminos UAT
+Posesión,2.1382083061633765,49.47875,64.81,Correcaminos UAT
+Pases por posesión,1.6517211430225651,3.19575,4.58,Correcaminos UAT
+Contra ataque,0.5403533004515834,2.025,3,Correcaminos UAT
+Disparos en contra,-1.0954451150103321,4,2,Correcaminos UAT
+Pérdidas bajas,-1.2369031677811357,15.075,9,Correcaminos UAT
+Pérdidas medias,-1.4917806718011186,32.6,18,Correcaminos UAT
+Pérdidas altas,-0.10277352213285858,47.4,47,Correcaminos UAT
+Distancia de los disparos,0.23455661523438986,18.9005,19.46,Correcaminos UAT
+PDA,-0.019832064016140186,8.17575,8.13,Correcaminos UAT
+xG,1.426700967858676,1.221,1.99,Venados
+Recuparación baja,-0.7920255790863107,34.125,28,Venados
+Recuperación media,0.8520777969249967,30.95,36,Venados
+Recuperación alta,-0.01927003539991087,10.075,10,Venados
+Posesión,0.7630605589952796,49.47875,54.95,Venados
+Pases por posesión,0.017003450451921046,3.19575,3.21,Venados
+Contra ataque,-0.568063726115767,2.025,1,Venados
+Disparos en contra,1.0954451150103321,4,6,Venados
+Pérdidas bajas,-0.21887586919583873,15.075,14,Venados
+Pérdidas medias,0.9604615284198981,32.6,42,Venados
+Pérdidas altas,-1.3874425487935953,47.4,42,Venados
+Distancia de los disparos,1.6138082043695865,18.9005,22.75,Venados
+PDA,2.0002207953327846,8.17575,12.79,Venados
+xG,-0.05751330299560359,1.221,1.19,Pumas Tabasco
+Recuparación baja,0.7596980044297266,34.125,40,Pumas Tabasco
+Recuperación media,-0.8352049692631154,30.95,26,Pumas Tabasco
+Recuperación alta,2.293134212589415,10.075,19,Pumas Tabasco
+Posesión,1.885772462109192,49.47875,63,Pumas Tabasco
+Pases por posesión,0.5062255336299971,3.19575,3.62,Pumas Tabasco
+Contra ataque,-1.1222722393994422,2.025,0,Pumas Tabasco
+Disparos en contra,-1.6431676725154982,4,1,Pumas Tabasco
+Pérdidas bajas,-0.42248132891289814,15.075,13,Pumas Tabasco
+Pérdidas medias,-0.5721898467182374,32.6,27,Pumas Tabasco
+Pérdidas altas,4.522034973845794,47.4,65,Pumas Tabasco
+Distancia de los disparos,0.9095095205558691,18.9005,21.07,Pumas Tabasco
+PDA,-0.24958056518672664,8.17575,7.6,Pumas Tabasco
+xG,1.909070605886317,1.221,2.25,Tapatío
+Recuparación baja,-0.016163787328292056,34.125,34,Tapatío
+Recuperación media,-0.8352049692631154,30.95,26,Tapatío
+Recuperación alta,0.23766376993223648,10.075,11,Tapatío
+Posesión,0.6514867052696728,49.47875,54.15,Tapatío
+Pases por posesión,-0.19777697630918564,3.19575,3.03,Tapatío
+Contra ataque,0.5403533004515834,2.025,3,Tapatío
+Disparos en contra,1.0954451150103321,4,6,Tapatío
+Pérdidas bajas,0.3919405099553395,15.075,17,Tapatío
+Pérdidas medias,0.14304746167955915,32.6,34,Tapatío
+Pérdidas altas,-2.1582439647900373,47.4,39,Tapatío
+Distancia de los disparos,-1.953800009472519,18.9005,14.24,Tapatío
+PDA,-0.5443522270659689,8.17575,6.92,Tapatío
+xG,1.1298581136878203,1.221,1.83,Tlaxcala
+Recuparación baja,-0.921335877712647,34.125,27,Tlaxcala
+Recuperación media,-1.5101180757383603,30.95,22,Tlaxcala
+Recuperación alta,0.7515313805965312,10.075,13,Tlaxcala
+Posesión,0.3418692611811156,49.47875,51.93,Tlaxcala
+Pases por posesión,0.06473243417661143,3.19575,3.25,Tlaxcala
+Contra ataque,-0.568063726115767,2.025,1,Tlaxcala
+Disparos en contra,-1.0954451150103321,4,2,Tlaxcala
+Pérdidas bajas,-0.8296922483470169,15.075,11,Tlaxcala
+Pérdidas medias,-1.7983109468287457,32.6,15,Tlaxcala
+Pérdidas altas,-0.35970732746500594,47.4,46,Tlaxcala
+Distancia de los disparos,0.980777839751304,18.9005,21.24,Tlaxcala
+PDA,-0.5356824723048145,8.17575,6.94,Tlaxcala
