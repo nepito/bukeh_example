@@ -12,7 +12,7 @@ app = typer.Typer(help="Awesome CLI user manager.")
 
 
 @app.command()
-def write_report_abot_teams(path_possession = "", path_intervals = "", color_team = ""):
+def write_report_abot_teams(path_possession="", path_intervals="", color_team=""):
     df_possiession = pd.read_csv(path_possession)
     team = df_possiession.columns[3]
     df_possiession = df_possiession.sort_values(by=[team])
