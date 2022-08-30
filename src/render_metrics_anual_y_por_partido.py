@@ -1,20 +1,20 @@
-from jinja2 import Environment, FileSystemLoader
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
 from bokeh.models import Tabs
 import pandas as pd
 from xg_plots import (
-    get_match,
     render_all_report,
     get_info_to_write,
     Plotter_Intervals_From_Rivals,
     COLOR,
-    COLOR_IN_TEXT,
 )
 
 
 df_possiession = pd.read_csv("data/output_morelia.csv")
+team = df_possiession.columns[3]
+df_possiession = df_possiession.sort_values(by=[team])
+
 info_to_write = get_info_to_write(df_possiession)
 team = info_to_write["team"]
 
