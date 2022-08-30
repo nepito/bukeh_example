@@ -68,7 +68,6 @@ def test_misc_of_figure():
     assert p.title.text_font_size == "12pt"
     assert p.y_range.range_padding == 0.4
     assert p.ygrid.grid_line_color is None
-    # assert p.axis.minor_tick_line_color is None
     assert p.outline_line_color is None
     assert p.xaxis.axis_label == "Posesión (%)"
     assert p.yaxis.axis_label == "Morelia vs"
@@ -127,7 +126,6 @@ def test_misc_intervals():
         "xG",
     ]
     assert figura.y_range.factors == metrics
-    # figura.renderers[1].glyph.fill_color == rgba(255, 140, 0, 0.1)
 
 
 def test_get_info_to_write():
