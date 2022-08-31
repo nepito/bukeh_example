@@ -1,11 +1,8 @@
 from jinja2 import Environment, FileSystemLoader
 from bokeh.embed import components
-from bokeh.models import ColumnDataSource
-from bokeh.plotting import figure
-from bokeh.embed import components
-from bokeh.models import ColumnDataSource
-from bokeh.plotting import figure
 from bokeh.models import Tabs
+from bokeh.models import ColumnDataSource
+from bokeh.plotting import figure
 from xg_plots import COLOR, COLOR_IN_TEXT, Plotter_Intervals_From_Rivals
 
 
@@ -48,7 +45,7 @@ def get_bar_plot_of_possession(df_possiession, team):
     p.legend.orientation = "horizontal"
     p.xaxis.axis_label = "Posesión (%)"
     p.yaxis.axis_label = f"{df_possiession.columns[3]} vs"
-    return components(p)
+    return p
 
 
 def get_info_to_write(df_possiession):
