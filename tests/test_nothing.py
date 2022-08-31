@@ -4,6 +4,8 @@ import xg_plots as xgp
 import pytest
 import pandas as pd
 
+from xg_plots.nothing import COLOR_IN_TEXT, COLOR
+
 
 def test_return_one():
     expected = 1
@@ -68,7 +70,6 @@ def test_misc_of_figure():
     assert p.title.text_font_size == "12pt"
     assert p.y_range.range_padding == 0.4
     assert p.ygrid.grid_line_color is None
-    # assert p.axis.minor_tick_line_color is None
     assert p.outline_line_color is None
     assert p.xaxis.axis_label == "Posesión (%)"
     assert p.yaxis.axis_label == "Morelia vs"
@@ -127,4 +128,32 @@ def test_misc_intervals():
         "xG",
     ]
     assert figura.y_range.factors == metrics
-    # figura.renderers[1].glyph.fill_color == rgba(255, 140, 0, 0.1)
+    rend4 = figura.renderers[4]
+    assert rend4.data_source.data == {"x": [-3, -3, -2, -2], "y": [0, 6, 6, 0]}
+    assert rend4.glyph.hatch_color.g == 205
+
+
+def test_get_info_to_write():
+    info_to_write = xgp.get_info_to_write(df_possiession)
+    assert info_to_write["primer_partido"] == "Atlético Morelia vs Tapatío"
+    assert info_to_write["marcador"] == "1 a 2"
+    assert info_to_write["ultimo_partido"] == "Tlaxcala vs Atlético Morelia"
+    assert info_to_write["ultimo_marcador"] == "0 a 4"
+    assert info_to_write["ultimo_rival"] == "Pumas"
+    assert info_to_write["rival"] == "Tlaxcala"
+    assert info_to_write["schema_rival"] == "4-4-2"
+    assert info_to_write["schema_team"] == "4-4-1-1"
+
+
+def test_COLOR_IN_TEXT():
+    assert COLOR_IN_TEXT["Morelia"] == ["amarillo", "rojo"]
+    assert COLOR_IN_TEXT["Cimarrones"] == ["azul", "rojo"]
+    assert COLOR_IN_TEXT["Raya2"] == ["azul", "gris"]
+    assert COLOR_IN_TEXT["Correcaminos"] == ["naranja", "azul"]
+
+
+def test_COLOR():
+    assert COLOR["Morelia"] == ["#FFC300", "#DF0404"]
+    assert COLOR["Cimarrones"] == ["#718dbf", "#e84d60"]
+    assert COLOR["Raya2"] == ["#191970", "#C0C0C0"]
+    assert COLOR["Correcaminos"] == ["#FF4500", "#191970"]

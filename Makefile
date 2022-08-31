@@ -4,7 +4,10 @@ myapp/salidita.html: myapp/secod_try.py
 .PHONY: init install tests
 
 results/metric_annual_and_by_matches_correcaminos.html: src/render_metrics_anual_y_por_partido.py
-	python src/render_metrics_anual_y_por_partido.py > results/metric_annual_and_by_matches_correcaminos.html
+	python src/render_metrics_anual_y_por_partido.py \
+	--path-possession=data/output_correcaminos.csv \
+	--path-intervals=data/metrics_intervals_correcaminos.csv \
+	--color-team=Correcaminos > results/metric_annual_and_by_matches_correcaminos.html
 
 results/metric_annual_and_by_matches_morelia.html: src/render_metrics_anual_y_por_partido.py
 	python src/render_metrics_anual_y_por_partido.py > results/metric_annual_and_by_matches_morelia.html
