@@ -128,6 +128,9 @@ def test_misc_intervals():
         "xG",
     ]
     assert figura.y_range.factors == metrics
+    rend4 = figura.renderers[4]
+    assert rend4.data_source.data == {"x": [-3, -3, -2, -2], "y": [0, 6, 6, 0]}
+    assert rend4.glyph.hatch_color.g == 205
 
 
 def test_get_info_to_write():
