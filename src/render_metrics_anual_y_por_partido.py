@@ -20,7 +20,7 @@ def write_report_abot_teams(path_possession="", path_intervals="", color_team=""
     info_to_write = get_info_to_write(df_possiession)
     team = info_to_write["team"]
     p = get_bar_plot_of_possession(df_possiession, color_team)
-    script, div =components(p)
+    script, div = components(p)
     script_interval, div_interval = plot_intrvals_of_the_last_five_matches(path_intervals, team)
     render_all_report(script, div, script_interval, div_interval, info_to_write, color_team)
 
