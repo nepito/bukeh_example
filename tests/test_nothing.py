@@ -4,6 +4,8 @@ import xg_plots as xgp
 import pytest
 import pandas as pd
 
+from xg_plots.nothing import COLOR_IN_TEXT, COLOR
+
 
 def test_return_one():
     expected = 1
@@ -138,3 +140,17 @@ def test_get_info_to_write():
     assert info_to_write["rival"] == "Tlaxcala"
     assert info_to_write["schema_rival"] == "4-4-2"
     assert info_to_write["schema_team"] == "4-4-1-1"
+
+
+def test_COLOR_IN_TEXT():
+    assert COLOR_IN_TEXT["Morelia"] == ["amarillo", "rojo"]
+    assert COLOR_IN_TEXT["Cimarrones"] == ["azul", "rojo"]
+    assert COLOR_IN_TEXT["Raya2"] == ["azul", "gris"]
+    assert COLOR_IN_TEXT["Correcaminos"] == ["naranja", "azul"]
+
+
+def test_COLOR():
+    assert COLOR["Morelia"] == ["#FFC300", "#DF0404"]
+    assert COLOR["Cimarrones"] == ["#718dbf", "#e84d60"]
+    assert COLOR["Raya2"] == ["#191970", "#C0C0C0"]
+    assert COLOR["Correcaminos"] == ["#FF4500", "#191970"]
