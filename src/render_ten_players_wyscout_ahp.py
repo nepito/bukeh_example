@@ -5,21 +5,12 @@ from xg_plots import Plotter_Step_Goals_and_xG
 metrics = pd.read_csv("data/normalized_metrics.csv")
 
 
-def get_player(path, name):
-    player = pd.read_csv(path)
-    selected_columns = ["Date", "Goals", "xG", "Match", "Minutes played"]
-    just_mx = player["Competition"] == "Mexico. Liga MX"
-    cleaned_player = player[just_mx][selected_columns]
-    cleaned_player["player"] = name
-    cleaned_player["Date"] = pd.to_datetime(cleaned_player["Date"])
-    return cleaned_player
-
-
 TOOLTIPS = [
     ("Partido", "@{Match}"),
     ("Minutos Jugados", "@{Minutes played}"),
     ("xG", "@{xG}"),
 ]
+
 plotter = Plotter_Step_Goals_and_xG()
 plotter.set_player("data/berterame_wyscout.csv", "Germán Berterame")
 script, div = plotter.plot_step_goals_and_xG(TOOLTIPS)
@@ -50,7 +41,7 @@ fileLoader = FileSystemLoader("reports")
 env = Environment(loader=fileLoader)
 
 all_players = {f"player_{player+1}": get_str_metrics(player) for player in range(4)}
-rendered = env.get_template("ejemplo_1.html").render(
+rendered = env.get_template("ten_players_wyscout_ahp.html").render(
     script=script,
     div=div,
     script_ra=script_ra,

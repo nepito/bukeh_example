@@ -2,7 +2,6 @@ from jinja2 import Environment, FileSystemLoader
 from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource
-from bokeh.sampledata.sprint import sprint
 from bokeh.colors import RGB
 from bokeh.models import Panel, Tabs
 import pandas as pd

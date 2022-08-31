@@ -14,4 +14,4 @@ RUN pip install \
     uvicorn
 WORKDIR /workdir
 COPY . .
-CMD ["make", "run"]
+RUN make install

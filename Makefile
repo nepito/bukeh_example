@@ -3,11 +3,20 @@ myapp/salidita.html: myapp/secod_try.py
 
 .PHONY: init install tests
 
-metric_annual_and_by_matches.html: src/render_metrics_anual_y_por_partido.py
-	python src/render_metrics_anual_y_por_partido.py > metric_annual_and_by_matches.html
+results/metric_annual_and_by_matches_correcaminos.html: src/render_metrics_anual_y_por_partido.py
+	python src/render_metrics_anual_y_por_partido.py \
+	--path-possession=data/output_correcaminos.csv \
+	--path-intervals=data/metrics_intervals_correcaminos.csv \
+	--color-team=Correcaminos > results/metric_annual_and_by_matches_correcaminos.html
+
+results/metric_annual_and_by_matches_morelia.html: src/render_metrics_anual_y_por_partido.py
+	python src/render_metrics_anual_y_por_partido.py > results/metric_annual_and_by_matches_morelia.html
 
 aguirre_berterame_ibanez_janssen.html: src/render_metrics.py
 	python src/render_metrics.py > aguirre_berterame_ibanez_janssen.html
+
+ten_expansion_players.html: reports/ten_players_wyscout_ahp.html src/render_ten_players_wyscout_ahp.py
+	python src/render_ten_players_wyscout_ahp.py > ten_expansion_players.html
 
 build:
 	docker build --tag=mamando .
@@ -38,6 +47,9 @@ init: install tests
 
 install:
 	pip install --editable .
+
+mutants:
+	mutmut run --paths-to-mutate xg_plots
 
 run:
 	bokeh serve --show --port=3535 myapp/main.py
