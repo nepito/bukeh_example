@@ -9,7 +9,18 @@ url = "https://raw.githubusercontent.com/nepito/calculator-trs/develop/tests/dat
 players = pd.read_csv("/workdir/data/player_for_scatter.csv")
 source = ColumnDataSource(data=players)
 
-p = figure(title="Goles vs Asistencias")
+TOOLTIPS = [
+    ("Jugador", "@{player}"),
+    ("Equipo", "@{team}"),
+    ("Goles sin penales", "@{non_penalty_goals}"),
+]
+
+p = figure(
+    title="Goles vs Asistencias",
+    toolbar_location=None,
+    tools="hover",
+    tooltips=TOOLTIPS,
+)
 
 p.scatter(x="goals_per_90", y="assists_per_90", source=source)
 
