@@ -23,7 +23,7 @@ p = figure(
 )
 
 median = players.median()
-p.circle(x="goals_per_90", y="assists_per_90", radius=0.008, source=source)
+p.circle(x="goals_per_90", y="assists_per_90", radius="radio", source=source)
 hline = Span(location=median["assists_per_90"], dimension="width", line_color="green", line_width=2)
 vline = Span(location=median["goals_per_90"], dimension="height", line_color="green", line_width=2)
 
