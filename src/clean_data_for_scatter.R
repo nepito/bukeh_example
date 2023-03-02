@@ -1,7 +1,9 @@
 library(tidyverse)
 
-players <- read_csv("data/LigaMX.csv", show_col_types = FALSE) |>
+players <- read_csv("/workdir/data/atacantes_mx_22-23.csv", show_col_types = FALSE) |>
   janitor::clean_names() |>
   filter(minutes_played > 900) |>
   filter(position != "GK") |>
+  mutate(radio = sqrt(assists_per_90^2 + goals_per_90^2)) |>
+  mutate(radio = 0.004 + (radio*0.012)/max(radio)) |>
   write_csv("data/player_for_scatter.csv")
