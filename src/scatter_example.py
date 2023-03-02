@@ -27,7 +27,8 @@ p.circle(x="goals_per_90", y="assists_per_90", radius=0.008, source=source)
 hline = Span(location=median["assists_per_90"], dimension="width", line_color="green", line_width=2)
 vline = Span(location=median["goals_per_90"], dimension="height", line_color="green", line_width=2)
 
-image3 = ImageURL(url=dict(value=url), x=0.6, y=0.34, h=0.03, w=0.15, anchor="bottom_left")
+height = 0.03
+image3 = ImageURL(url=dict(value=url), x=0.6, y=0.34, h=height, w=3.95*height, anchor="bottom_left")
 p.add_glyph(source, image3)
 p.xaxis.axis_label = "Goles por cada 90 minutos"
 p.yaxis.axis_label = "Asistencias por cada 90 minutos"
