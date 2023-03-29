@@ -20,6 +20,8 @@ p = figure(
     toolbar_location=None,
     tools="hover",
     tooltips=TOOLTIPS,
+    sizing_mode = "scale_both",
+    aspect_ratio = 1,
 )
 
 median = players.median()
