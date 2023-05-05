@@ -53,7 +53,7 @@ script, div = components(p)
 fileLoader = FileSystemLoader("reports")
 env = Environment(loader=fileLoader)
 
-rendered = env.get_template("template.html").render(
+rendered = env.get_template("xa_and_xg_players.html").render(
     script=script,
     div=div,
 )
