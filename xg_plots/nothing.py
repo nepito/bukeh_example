@@ -66,6 +66,9 @@ class Plotter_Step_Goals_and_xG:
             x_axis_label="Fecha",
             y_axis_label="Goles",
             tooltips=TOOLTIPS,
+            sizing_mode = "scale_both",
+            aspect_ratio = 1,
+            toolbar_location=None,
         )
         p.step(x="Date", y="Goals", source=self.__data, color=color)
         p.line(x="Date", y="Goals", source=self.__data, color=RGB(54, 162, 235, 0.0))
