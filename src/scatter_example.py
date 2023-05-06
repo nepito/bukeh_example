@@ -6,7 +6,7 @@ from bokeh.models import ColumnDataSource, ImageURL, Span
 
 url = "https://raw.githubusercontent.com/nepito/calculator-trs/develop/tests/data/logo_nies.png"
 
-players = pd.read_csv("/workdir/data/player_for_scatter.csv")
+players = pd.read_csv("/workdir/data/femenil_player_for_scatter.csv")
 source = ColumnDataSource(data=players)
 
 TOOLTIPS = [
@@ -25,7 +25,7 @@ p = figure(
 )
 
 median = players.median()
-p.circle(x="goals_per_90", y="assists_per_90", radius="radio", source=source)
+p.circle(x="goals_per_90", y="assists_per_90", radius="radio", color = "pink", source=source)
 hline = Span(
     location=median["assists_per_90"],
     dimension="width",
@@ -41,9 +41,9 @@ vline = Span(
     line_dash="dashed",
 )
 
-height = 0.03
+height = 0.04
 image3 = ImageURL(
-    url=dict(value=url), x=0.78, y=0.34, h=height, w=3.95 * height, anchor="bottom_left"
+    url=dict(value=url), x=0.81, y=0.4, h=height, w=3.95 * height, anchor="bottom_left"
 )
 p.add_glyph(source, image3)
 p.xaxis.axis_label = "Goles por cada 90 minutos"
