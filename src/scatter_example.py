@@ -13,6 +13,7 @@ TOOLTIPS = [
     ("Jugador", "@{player}"),
     ("Equipo", "@{team}"),
     ("Goles sin penales", "@{non_penalty_goals}"),
+    ("Asistencias", "@{assists}"),
 ]
 
 p = figure(
