@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>nies</title>
+        <link rel="icon" href = "https://raw.githubusercontent.com/nepito/bukeh_example/feature/template/data/nies.png" type="image/icon type">
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.2.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.2.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <p>
+                Hoy hablaremos de las atacantes de la LigaMX Femenil. Para hacer eso tomaremos en
+                cuenta la participación en goles de las jugadoras. Con participación en los goles
+                nos referimos a los goles anotados y a las asistencias a goles. El periodo que
+                consideraremos será el último año. La intención es representar de una manera gráfica
+                las jagadoras que más peso tienen en el marcador. Las magas del gol.
+            </p>
+            <p class="lead">
+                En la figura de abajo podemos ver a todas las atacantes de la LigaMX Femenil que han
+                jugado más de 900 minutos en el último año. En el eje horizontal tenemos los goles
+                por cada 90 minutos en los que estuvo cada jugadora en el campo. En el eje vertical
+                tenemos las asistencias que hicieron las jugadoras cada 90 minutos. Por facilidad,
+                de aquí en adelante siempre nos referiremos a valores por cada 90 minutos a menos de
+                que digamos lo contrario.
+                </p>
+                <p>
+                Las líneas verdes, horizontal y vertical, corresponden a las medianas de asistencias
+                y goles del grupo de jugadoras. La línea verde vertical divide al grupo de jugadoras
+                en dos. El 50% de las jugadoras han metido menos de 0.09 goles. De manera similar, el
+                50% de las jugadoras han realizado menos de 0.08 asistancias.
+                </p>
+                <p>
+                Cada círculo rosa represanta a una jugadora. Un mayor tamaño del círculo corresponde a
+                las jugadoras que han participado más en los goles. En el tamaño valoramos igual si
+                la jugadora hace el gol o si hace la asistencia del gol. Al pasar el cursor por el
+                círculo más alto notaremos que corresponde a E. Salazar. La jugadora
+                del Pachuca es quien tiene más asistencias. La jugadora más goleadora, la que está más
+                a la derecha, es K. Palacios del América. En el origen, podemos ver muchas
+                jugadoras que no han hecho ni goles ni asistencias.
+            </p>
+        </div>
+        <div class="container">
+        <figure class="figure">
+		{{ script|safe }} {{ div|safe }}
+    <figcaption class="figure-caption text-end"><strong>Figura 1.</strong> Goles y asistencias para
+    jugadoras de la LigaMX Femenil en el último año. El tamaño del círculo corresponde la partición
+    en los goles de cada jugadora</figcaption>
+    </figure>
+	    </div>
+        <p>
+            Ahora hablaremos de goles totales (no del promedio de 90 minutos). A. Chavarín ha metido
+            17 goles (sin considerar goles anotados en penales). Esta jugadora es del grupo de las
+            que tienen goles pero no asistencias. Este grupo de jugadoras son aquellas que están
+            sobre la línea horizontal de valor cero. Otras jugadores de este grupo son R. Cuellar
+            (Tijuana), C. Venegas (Atlas) y M. Mauleon (América). De manera similar, D. Hernandez
+            (América), M. Castro (Puebla) y J. Orejel (América) son algunas jugadoras que han hechos
+            asistencias pero no goles. Estas jugadoras y otras más están sobre la línea vertical de
+            valor cero.
+        </p>
+        <p>
+            Una fuerte felicitación a todas.
+        </p>
+    </body>
+</html>
